@@ -12,11 +12,11 @@ const BUILDED_GAME_URL = `${process.env.NEXT_PUBLIC_BASE_CDN_URL}/builded-games/
 
 const UnityFinalizedEvent = "HR_GameEnd";
 
-interface Props {
+type SceneProps = {
   onComplete?: () => void;
-}
+};
 
-export const RacingScene = ({ onComplete }: Props) => {
+export const RacingScene = ({ onComplete }: SceneProps) => {
   const devicePixelRatio = useDevicePixelRatio();
 
   const { status, winnerHorse, resetSelectedHorse } = useHorseRaceGameStore([

@@ -24,11 +24,11 @@ import { Button } from "../../../ui/button";
 // import { AudioController } from "@/components/common/audio-controller";
 // import { PreBetButton } from "@/app/(games)/_components/bet-button";
 
-interface Props {
+type Props = {
   minWager: number;
   maxWager: number;
   winMultiplier: number;
-}
+};
 
 export const BetController: React.FC<Props> = ({
   minWager,

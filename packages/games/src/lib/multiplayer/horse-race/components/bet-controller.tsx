@@ -27,7 +27,6 @@ interface Props {
 export const HorseRaceBetController: React.FC<Props> = ({
   minWager,
   maxWager,
-
   maxPayout,
   isGamblerParticipant,
 }) => {

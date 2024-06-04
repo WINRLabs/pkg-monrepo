@@ -19,10 +19,10 @@ const iconColor = {
   red: "text-red-600",
 };
 
-interface HorseDetailProps {
+type HorseDetailProps = {
   variant: "gray" | "yellow" | "blue" | "green" | "red";
   multiplier: Multiplier;
-}
+};
 
 const HorseDetail: React.FC<HorseDetailProps> = ({ variant, multiplier }) => {
   const { isParticipantsOpen, selectedHorse } = useHorseRaceGameStore([
