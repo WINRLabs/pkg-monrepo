@@ -1,11 +1,9 @@
 import { UseFormReturn } from "react-hook-form";
 import { Horse } from "../constants";
 
-export type HorseRaceForm = UseFormReturn<
-  {
-    wager: number;
-    horse: Horse;
-  },
-  any,
-  undefined
->;
+export interface HorseRaceFormFields {
+  wager: number;
+  horse: Horse;
+}
+
+export type HorseRaceForm = UseFormReturn<HorseRaceFormFields, any, undefined>;
