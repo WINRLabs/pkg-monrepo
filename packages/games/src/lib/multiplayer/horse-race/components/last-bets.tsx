@@ -3,10 +3,7 @@ import { LastBetsContainer } from "../../../common/last-bets-container";
 import { cn } from "../../../utils/style";
 import { Horse, horseMultipliers } from "../constants";
 
-export const LastBets: React.FC<{ isFinished: boolean; history: any }> = ({
-  isFinished,
-  history,
-}) => {
+export const LastBets: React.FC<{ history: any }> = ({ history }) => {
   return (
     <LastBetsContainer className="absolute left-1/2 top-5 -translate-x-1/2">
       {history.map(

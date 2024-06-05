@@ -4,17 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { HorseRace } from "..";
 import { UnityGameContainer } from "../../../common/containers";
-import useMediaQuery from "../../../hooks/use-media-query";
 import { Form } from "../../../ui/form";
 import { Horse, horseMultipliers } from "../constants";
 import useHorseRaceGameStore from "../store";
 import { HorseRaceFormFields } from "../types";
-import { HorseRaceBetController } from "./bet-controller";
 import { HorseRaceGameProps } from "./game";
-import { LastBets } from "./last-bets";
-import { RacingScene } from "./scene";
-import SelectedHorseDetail from "./selected-horse-detail";
 
 type TemplateOptions = {
   scene?: {
@@ -86,21 +82,27 @@ export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(props.onSubmitGameForm)}>
         <UnityGameContainer
-          className="relative h-[840px]  overflow-hidden rounded-xl border border-zinc-800  md:h-[640px]"
+          className="wr-relative wr-h-[840px]  wr-overflow-hidden wr-rounded-xl wr-border wr-border-zinc-800  md:wr-h-[640px]"
           id="animationScene"
         >
-          <HorseRaceBetController
+          <HorseRace.BetController
             minWager={props?.minWager || 2}
             maxWager={props?.maxWager || 2000}
             maxPayout={maxPayout}
             isGamblerParticipant={isGamblerParticipant}
           />
-          <LastBets isFinished={isFinished} history={props.history} />
 
-          <RacingScene onComplete={props.onComplete} />
+          <HorseRace.Game {...props}>
+            <HorseRace.LastBets history={props.history} />
 
-          <div className="absolute top-0 z-10 h-full w-full md:bg-unity-overlay" />
-          <SelectedHorseDetail />
+            <HorseRace.Scene
+              onComplete={props.onComplete}
+              buildedGameUrl={props.buildedGameUrl}
+            />
+
+            <div className="wr-absolute wr-top-0 wr-z-10 wr-h-full wr-w-full md:wr-bg-unity-overlay" />
+            <HorseRace.SelectedHorseDetail />
+          </HorseRace.Game>
         </UnityGameContainer>
       </form>
     </Form>

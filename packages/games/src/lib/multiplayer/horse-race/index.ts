@@ -1,4 +1,3 @@
-import { BetController } from "../../solo/dice/components/bet-controller";
 import { HorseRaceGame } from "./components/game";
 import HorseDetail from "./components/horse-detail";
 import { LastBets } from "./components/last-bets";
@@ -6,6 +5,7 @@ import { RacingScene } from "./components/scene";
 import { SceneLoader } from "./components/scene/loader";
 import SelectedHorseDetail from "./components/selected-horse-detail";
 import { HorseRaceTemplate } from "./components/template";
+import { HorseRaceBetController } from "./components/bet-controller";
 
 export const HorseRace = {
   Game: HorseRaceGame,
@@ -13,7 +13,7 @@ export const HorseRace = {
   LastBets,
   Scene: RacingScene,
   Detail: HorseDetail,
-  BetController,
+  BetController: HorseRaceBetController,
   SceneLoader,
   Template: HorseRaceTemplate,
 };

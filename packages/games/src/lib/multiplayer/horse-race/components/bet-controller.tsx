@@ -17,18 +17,20 @@ import { Horse, HorseRaceStatus } from "../constants";
 import useHorseRaceGameStore from "../store";
 import { HorseRaceForm } from "../types";
 
-interface Props {
+type Props = {
   minWager: number;
   maxWager: number;
   maxPayout: number;
   isGamblerParticipant: boolean;
-}
+  logo: string;
+};
 
 export const HorseRaceBetController: React.FC<Props> = ({
   minWager,
   maxWager,
   maxPayout,
   isGamblerParticipant,
+  logo,
 }) => {
   const form = useFormContext() as HorseRaceForm;
 
@@ -52,40 +54,35 @@ export const HorseRaceBetController: React.FC<Props> = ({
   });
 
   return (
-    <UnityBetControllerContainer className="top-[276px] z-[15] h-full w-full md:top-0 md:w-[264px]">
-      <div className="mb-3 flex flex-col">
-        <div className="mb-3 hidden md:block">
+    <UnityBetControllerContainer className="wr-top-[276px] wr-z-[15] wr-h-full wr-w-full md:wr-top-0 md:wr-w-[264px]">
+      <div className="wr-mb-3 wr-flex wr-flex-col">
+        <div className="wr-mb-3 wr-hidden md:wr-block">
           <BetControllerTitle>
-            <img
-              src={"/images/horse-race/horse-race-logo.png"}
-              width={140}
-              height={60}
-              alt="game_logo"
-            />
+            <img src={logo || ""} width={140} height={60} alt="game_logo" />
           </BetControllerTitle>
         </div>
 
-        <div className="mb-4 flex flex-col gap-3 max-md:mt-[40px]">
-          <span className="text-unity-white-50">Next round in</span>
+        <div className="wr-mb-4 wr-flex wr-flex-col wr-gap-3 max-md:wr-mt-[40px]">
+          <span className="wr-text-unity-white-50">Next round in</span>
 
           {startTime > 0 ? (
             <CountdownProvider
               targetDate={new Date(startTime * 1000)?.toISOString()}
             >
-              <section className="flex items-center gap-2">
-                <div className="text-[64px] font-bold leading-[64px] text-white max-md:text-[32px] max-md:leading-[32px]">
+              <section className="wr-flex wr-items-center wr-gap-2">
+                <div className="wr-text-[64px] wr-font-bold wr-leading-[64px] wr-text-white max-md:wr-text-[32px] max-md:wr-leading-[32px]">
                   <Minutes />
                 </div>
-                <div className="text-[64px] font-bold leading-[64px] text-white max-md:text-[32px] max-md:leading-[32px]">
+                <div className="wr-text-[64px] wr-font-bold wr-leading-[64px] wr-text-white max-md:wr-text-[32px] max-md:wr-leading-[32px]">
                   :
                 </div>
-                <div className="text-[64px] font-bold leading-[64px] text-white max-md:text-[32px] max-md:leading-[32px]">
+                <div className="wr-text-[64px] wr-font-bold wr-leading-[64px] wr-text-white max-md:wr-text-[32px] max-md:wr-leading-[32px]">
                   <Seconds />
                 </div>
               </section>
             </CountdownProvider>
           ) : (
-            <span className="text-[64px] font-bold leading-[64px] text-white max-md:text-[32px] max-md:leading-[32px]">
+            <span className="wr-text-[64px] wr-font-bold wr-leading-[64px] wr-text-white max-md:wr-text-[32px] max-md:wr-leading-[32px]">
               Waiting...
             </span>
           )}
@@ -94,28 +91,29 @@ export const HorseRaceBetController: React.FC<Props> = ({
         <UnityWagerFormField
           minWager={minWager}
           maxWager={maxWager}
-          className="order-2 md:order-[unset]"
+          className="wr-order-2 md:wr-order-[unset]"
         />
 
         <FormField
           control={form.control}
           name="horse"
           render={({ field }) => (
-            <FormItem className="order-2 md:order-[unset]">
-              <FormLabel className="text-unity-white-50">Choose</FormLabel>
+            <FormItem className="wr-order-2 md:wr-order-[unset]">
+              <FormLabel className="wr-text-unity-white-50">Choose</FormLabel>
               <FormControl>
                 <Radio.RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="grid grid-cols-5 grid-rows-1 gap-[6px]"
+                  className="wr-grid wr-grid-cols-5 wr-grid-rows-1 wr-gap-[6px]"
                 >
-                  <FormItem className="mb-0">
+                  <FormItem className="wr-mb-0">
                     <FormControl>
                       <Radio.Item
                         className={cn(
-                          "h-full w-full rounded-md bg-white/80 py-[10px] text-center text-white transition-all duration-150 hover:text-white",
+                          "wr-h-full wr-w-full wr-rounded-md wr-bg-white/80 wr-py-[10px] wr-text-center wr-text-white wr-transition-all wr-duration-150 hover:wr-text-white",
                           {
-                            "bg-white/70 text-white": field.value === Horse.ONE,
+                            "wr-bg-white/70 wr-text-white":
+                              field.value === Horse.ONE,
                           }
                         )}
                         value={Horse.ONE}
@@ -128,9 +126,9 @@ export const HorseRaceBetController: React.FC<Props> = ({
                     <FormControl>
                       <Radio.Item
                         className={cn(
-                          "h-full w-full rounded-md bg-yellow-400/80 py-[10px] text-center text-yellow-300 transition-all duration-150 hover:text-white",
+                          "wr-h-full wr-w-full wr-rounded-md wr-bg-yellow-400/80 wr-py-[10px] wr-text-center wr-text-yellow-300 wr-transition-all wr-duration-150 hover:wr-text-white",
                           {
-                            "bg-yellow-600 text-white":
+                            "wr-bg-yellow-600 wr-text-white":
                               field.value === Horse.TWO,
                           }
                         )}
@@ -140,13 +138,13 @@ export const HorseRaceBetController: React.FC<Props> = ({
                       </Radio.Item>
                     </FormControl>
                   </FormItem>
-                  <FormItem className="mb-0">
+                  <FormItem className="wr-mb-0">
                     <FormControl>
                       <Radio.Item
                         className={cn(
-                          "h-full w-full rounded-md bg-blue-600/70 py-[10px] text-center text-blue-300",
+                          "wr-h-full wr-w-full wr-rounded-md wr-bg-blue-600/70 wr-py-[10px] wr-text-center wr-text-blue-300",
                           {
-                            "bg-blue-600 text-white":
+                            "wr-bg-blue-600 wr-text-white":
                               field.value === Horse.THREE,
                           }
                         )}
@@ -160,9 +158,9 @@ export const HorseRaceBetController: React.FC<Props> = ({
                     <FormControl>
                       <Radio.Item
                         className={cn(
-                          "h-full w-full rounded-md bg-green-500/80 py-[10px] text-center text-green-300",
+                          "wr-h-full wr-w-full wr-rounded-md wr-bg-green-500/80 wr-py-[10px] wr-text-center wr-text-green-300",
                           {
-                            "bg-green-500 text-white":
+                            "wr-bg-green-500 wr-text-white":
                               field.value === Horse.FOUR,
                           }
                         )}
@@ -176,9 +174,10 @@ export const HorseRaceBetController: React.FC<Props> = ({
                     <FormControl>
                       <Radio.Item
                         className={cn(
-                          "h-full w-full rounded-md bg-red-600/80 py-[10px] text-center text-red-300",
+                          "wr-h-full wr-w-full wr-rounded-md wr-bg-red-600/80 wr-py-[10px] wr-text-center wr-text-red-300",
                           {
-                            "bg-red-600 text-white": field.value === Horse.FIVE,
+                            "wr-bg-red-600 wr-text-white":
+                              field.value === Horse.FIVE,
                           }
                         )}
                         value={Horse.FIVE}

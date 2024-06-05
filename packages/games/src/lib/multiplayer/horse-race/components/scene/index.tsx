@@ -6,17 +6,16 @@ import { useListenUnityEvent } from "../../../../hooks/use-listen-unity-event";
 import { useEqualizeUnitySound } from "../../../../hooks/use-unity-sound";
 import { toFormatted } from "../../../../utils/web3";
 import useHorseRaceGameStore from "../../store";
-import { HorseRaceStatus } from "../../types";
-
-const BUILDED_GAME_URL = `${process.env.NEXT_PUBLIC_BASE_CDN_URL}/builded-games/horse-racing`;
+import { HorseRaceStatus } from "../../constants";
 
 const UnityFinalizedEvent = "HR_GameEnd";
 
 type SceneProps = {
   onComplete?: () => void;
+  buildedGameUrl: string;
 };
 
-export const RacingScene = ({ onComplete }: SceneProps) => {
+export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
   const devicePixelRatio = useDevicePixelRatio();
 
   const { status, winnerHorse, resetSelectedHorse } = useHorseRaceGameStore([
@@ -34,10 +33,10 @@ export const RacingScene = ({ onComplete }: SceneProps) => {
     unityProvider,
     UNSAFE__detachAndUnloadImmediate: detachAndUnloadImmediate,
   } = useUnityContext({
-    loaderUrl: `${BUILDED_GAME_URL}/HorseRacing.loader.js`,
-    dataUrl: `${BUILDED_GAME_URL}/HorseRacing.data.unityweb`,
-    frameworkUrl: `${BUILDED_GAME_URL}/HorseRacing.framework.js.unityweb`,
-    codeUrl: `${BUILDED_GAME_URL}/HorseRacing.wasm.unityweb`,
+    loaderUrl: `${buildedGameUrl || ""}/HorseRacing.loader.js`,
+    dataUrl: `${buildedGameUrl || ""}/HorseRacing.data.unityweb`,
+    frameworkUrl: `${buildedGameUrl || ""}/HorseRacing.framework.js.unityweb`,
+    codeUrl: `${buildedGameUrl || ""}/HorseRacing.wasm.unityweb`,
   });
 
   useEqualizeUnitySound({
