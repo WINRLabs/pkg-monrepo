@@ -7,29 +7,29 @@ export const SceneLoader = ({ percentage }: { percentage: number }) => {
   return (
     <>
       {percentage !== 100 && (
-        <div className="absolute left-0 top-0 z-[5] flex h-full w-full flex-col items-center justify-center gap-4">
+        <div className="wr-absolute wr-left-0 wr-top-0 wr-z-[5] wr-flex wr-h-full wr-w-full wr-flex-col wr-items-center wr-justify-center wr-gap-4">
           <img
             src={"/images/horse-race/loader.png"}
             alt="loader"
-            className="absolute left-0 top-0 z-[5] h-full w-full rounded-md"
+            className="wr-absolute wr-left-0 wr-top-0 wr-z-[5] wr-h-full wr-w-full wr-rounded-md"
           />
           <span
             style={{
               textShadow: "0 0 5px black, 0 0 5px black",
             }}
-            className="z-50 text-2xl font-bold text-white"
+            className="wr-z-50 wr-text-2xl wr-font-bold wr-text-white"
           >
             {percentage} %
           </span>
           <Progress.Root
-            className="radius-[1000px] relative z-50 h-[25px] w-[320px] overflow-hidden rounded-md bg-black"
+            className="wr-radius-[1000px] wr-relative wr-z-50 wr-h-[25px] wr-w-[320px] wr-overflow-hidden wr-rounded-md wr-bg-black"
             style={{
               transform: "translateZ(0)",
             }}
             value={percentage}
           >
             <Progress.Indicator
-              className="h-full w-full bg-gradient-to-t from-unity-horse-race-blue-400 to-unity-horse-race-blue-600"
+              className="wr-h-full wr-w-full wr-bg-gradient-to-t wr-from-unity-horse-race-blue-400 wr-to-unity-horse-race-blue-600"
               style={{
                 transform: `translateX(-${100 - percentage}%)`,
                 transition: "transform 660ms cubic-bezier(0.65, 0, 0.35, 1)",
@@ -40,7 +40,7 @@ export const SceneLoader = ({ percentage }: { percentage: number }) => {
             style={{
               textShadow: "0 0 5px black, 0 0 5px black",
             }}
-            className="z-50 text-2xl font-bold text-white"
+            className="wr-z-50 wr-text-2xl wr-font-bold wr-text-white"
           >
             Horse Race
           </span>

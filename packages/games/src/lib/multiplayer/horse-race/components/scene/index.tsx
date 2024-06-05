@@ -87,29 +87,29 @@ export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
   return (
     <>
       {percentageRef.current !== 100 && (
-        <div className="absolute left-0 top-0 z-[100] flex h-[276px] w-full flex-col items-center justify-center gap-4 md:h-full">
+        <div className="wr-absolute wr-left-0 wr-top-0 wr-z-[100] wr-flex wr-h-[276px] wr-w-full wr-flex-col wr-items-center wr-justify-center wr-gap-4 md:wr-h-full">
           <img
             src={"/images/horse-race/loader.png"}
             alt="loader"
-            className="absolute left-0 top-0 z-[5] h-full w-full rounded-md"
+            className="wr-absolute wr-left-0 wr-top-0 wr-z-[5] wr-h-full wr-w-full wr-rounded-md"
           />
           <span
             style={{
               textShadow: "0 0 5px black, 0 0 5px black",
             }}
-            className="z-50 text-2xl font-bold text-white"
+            className="wr-z-50 wr-text-2xl wr-font-bold wr-text-white"
           >
             {toFormatted(percentageRef.current, 2)} %
           </span>
           <Progress.Root
-            className="radius-[1000px] relative z-50 h-[25px] w-[320px] overflow-hidden rounded-md bg-black"
+            className="wr-radius-[1000px] wr-relative wr-z-50 wr-h-[25px] wr-w-[320px] wr-overflow-hidden wr-rounded-md wr-bg-black"
             style={{
               transform: "translateZ(0)",
             }}
             value={percentageRef.current}
           >
             <Progress.Indicator
-              className="h-full w-full bg-gradient-to-t from-unity-horse-race-blue-400 to-unity-horse-race-blue-600"
+              className="wr-h-full wr-w-full wr-bg-gradient-to-t wr-from-unity-horse-race-blue-400 wr-to-unity-horse-race-blue-600"
               style={{
                 transform: `translateX(-${100 - percentageRef.current}%)`,
                 transition: "transform 660ms cubic-bezier(0.65, 0, 0.35, 1)",
@@ -120,7 +120,7 @@ export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
             style={{
               textShadow: "0 0 5px black, 0 0 5px black",
             }}
-            className="z-50 text-2xl font-bold text-white"
+            className="wr-z-50 wr-text-2xl wr-font-bold wr-text-white"
           >
             Horse Race
           </span>
@@ -129,7 +129,7 @@ export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
       <Unity
         unityProvider={unityProvider}
         devicePixelRatio={devicePixelRatio}
-        className="h-[276px] w-full rounded-md bg-zinc-900 md:h-full"
+        className="wr-h-[276px] wr-w-full wr-rounded-md wr-bg-zinc-900 md:wr-h-full"
       />
     </>
   );
