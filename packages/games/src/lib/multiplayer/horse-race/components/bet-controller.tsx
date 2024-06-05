@@ -122,7 +122,7 @@ export const HorseRaceBetController: React.FC<Props> = ({
                       </Radio.Item>
                     </FormControl>
                   </FormItem>
-                  <FormItem className="mb-0">
+                  <FormItem className="wr-mb-0">
                     <FormControl>
                       <Radio.Item
                         className={cn(
@@ -154,7 +154,7 @@ export const HorseRaceBetController: React.FC<Props> = ({
                       </Radio.Item>
                     </FormControl>
                   </FormItem>
-                  <FormItem className="mb-0 ">
+                  <FormItem className="wr-mb-0 ">
                     <FormControl>
                       <Radio.Item
                         className={cn(
@@ -170,7 +170,7 @@ export const HorseRaceBetController: React.FC<Props> = ({
                       </Radio.Item>
                     </FormControl>
                   </FormItem>
-                  <FormItem className="mb-0 ">
+                  <FormItem className="wr-mb-0 ">
                     <FormControl>
                       <Radio.Item
                         className={cn(

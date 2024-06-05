@@ -31,6 +31,8 @@ export const RacingScene = ({
 
   const percentageRef = React.useRef(0);
 
+  const BUILDED_GAME_URL = `${buildedGameUrl}/builded-games/horse-racing`;
+
   const {
     sendMessage,
     isLoaded,
@@ -38,10 +40,10 @@ export const RacingScene = ({
     unityProvider,
     UNSAFE__detachAndUnloadImmediate: detachAndUnloadImmediate,
   } = useUnityContext({
-    loaderUrl: `${buildedGameUrl || ""}/HorseRacing.loader.js`,
-    dataUrl: `${buildedGameUrl || ""}/HorseRacing.data.unityweb`,
-    frameworkUrl: `${buildedGameUrl || ""}/HorseRacing.framework.js.unityweb`,
-    codeUrl: `${buildedGameUrl || ""}/HorseRacing.wasm.unityweb`,
+    loaderUrl: `${BUILDED_GAME_URL}/HorseRacing.loader.js`,
+    dataUrl: `${BUILDED_GAME_URL}/HorseRacing.data.unityweb`,
+    frameworkUrl: `${BUILDED_GAME_URL}/HorseRacing.framework.js.unityweb`,
+    codeUrl: `${BUILDED_GAME_URL}/HorseRacing.wasm.unityweb`,
   });
 
   useEqualizeUnitySound({

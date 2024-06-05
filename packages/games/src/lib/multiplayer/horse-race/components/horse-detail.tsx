@@ -111,7 +111,7 @@ const HorseDetail: React.FC<HorseDetailProps> = ({ variant, multiplier }) => {
         </div>
         <div
           className={cn(
-            "wr-flex wr-h-[28px] wr-w-[140px] wr-items-center wr-justify-between wr-rounded   wr-px-2.5 wr-text-[13px] wr-font-semibold ",
+            "wr-flex wr-h-[28px] wr-w-[140px] wr-items-center wr-justify-between wr-rounded wr-px-2.5 wr-text-[13px] wr-font-semibold ",
             color[variant]
           )}
         >
