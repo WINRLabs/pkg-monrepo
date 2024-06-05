@@ -101,6 +101,7 @@ export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
             <HorseRace.Scene
               onComplete={props.onComplete}
               buildedGameUrl={props.buildedGameUrl}
+              loader={props.options.scene?.loader || ""}
             />
 
             <div className="wr-absolute wr-top-0 wr-z-10 wr-h-full wr-w-full md:wr-bg-unity-overlay" />

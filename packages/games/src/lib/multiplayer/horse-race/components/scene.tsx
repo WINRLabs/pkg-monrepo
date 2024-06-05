@@ -1,21 +1,26 @@
 import * as Progress from "@radix-ui/react-progress";
 import React from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-import { useDevicePixelRatio } from "../../../../hooks/use-device-pixel-ratio";
-import { useListenUnityEvent } from "../../../../hooks/use-listen-unity-event";
-import { useEqualizeUnitySound } from "../../../../hooks/use-unity-sound";
-import { toFormatted } from "../../../../utils/web3";
-import useHorseRaceGameStore from "../../store";
-import { HorseRaceStatus } from "../../constants";
+import { useDevicePixelRatio } from "../../../hooks/use-device-pixel-ratio";
+import { useListenUnityEvent } from "../../../hooks/use-listen-unity-event";
+import { useEqualizeUnitySound } from "../../../hooks/use-unity-sound";
+import { toFormatted } from "../../../utils/web3";
+import { HorseRaceStatus } from "../constants";
+import useHorseRaceGameStore from "../store";
 
 const UnityFinalizedEvent = "HR_GameEnd";
 
 type SceneProps = {
   onComplete?: () => void;
   buildedGameUrl: string;
+  loader: string;
 };
 
-export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
+export const RacingScene = ({
+  onComplete,
+  buildedGameUrl,
+  loader,
+}: SceneProps) => {
   const devicePixelRatio = useDevicePixelRatio();
 
   const { status, winnerHorse, resetSelectedHorse } = useHorseRaceGameStore([
@@ -89,7 +94,7 @@ export const RacingScene = ({ onComplete, buildedGameUrl }: SceneProps) => {
       {percentageRef.current !== 100 && (
         <div className="wr-absolute wr-left-0 wr-top-0 wr-z-[100] wr-flex wr-h-[276px] wr-w-full wr-flex-col wr-items-center wr-justify-center wr-gap-4 md:wr-h-full">
           <img
-            src={"/images/horse-race/loader.png"}
+            src={loader}
             alt="loader"
             className="wr-absolute wr-left-0 wr-top-0 wr-z-[5] wr-h-full wr-w-full wr-rounded-md"
           />

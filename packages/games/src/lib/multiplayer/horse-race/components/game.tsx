@@ -4,7 +4,6 @@ import { HorseRaceStatus } from "../constants";
 
 export type HorseRaceGameProps = React.ComponentProps<"div"> & {
   gameResults: any[];
-  onAnimationStep?: (step: number) => void;
   onAnimationCompleted?: (result: any[]) => void;
 };
 
