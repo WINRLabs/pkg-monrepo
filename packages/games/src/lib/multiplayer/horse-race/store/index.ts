@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { shallow } from "zustand/shallow";
-import { HorseRaceStatus } from "../types";
+import { HorseRaceStatus } from "../constants";
 
 export type Multiplier = "2x" | "3x" | "8x" | "15x" | "60x";
 
@@ -31,6 +31,8 @@ export type HorseRaceGameState = {
   selectedHorse: MultiplierArray;
   isParticipantsOpen: boolean;
   lastBets: Multiplier[];
+  currentAnimationCount: number;
+  horseRaceGameResults: any[];
 };
 
 export type HorseRaceGameActions = {
@@ -40,6 +42,8 @@ export type HorseRaceGameActions = {
   resetSelectedHorse: () => void;
   setIsParticipantsOpen: (isOpen: boolean) => void;
   addLastBet: (multiplier: Multiplier) => void;
+  updateCurrentAnimationCount: (count: number) => void;
+  updateHorseRaceGameResults: (item: any[]) => void;
 };
 
 export type HorseRaceGameStore = HorseRaceGameState & HorseRaceGameActions;
@@ -51,6 +55,8 @@ export const horseRaceGameStore = create<HorseRaceGameStore>()((set) => ({
   startTime: 0,
   winnerHorse: 0,
   lastBets: [],
+  horseRaceGameResults: [],
+  currentAnimationCount: 0,
   addLastBet: (item) =>
     set((state) => ({ ...state, lastBets: [...state.lastBets, item] })),
   updateState: (state) => set((s) => ({ ...s, ...state })),
@@ -60,7 +66,10 @@ export const horseRaceGameStore = create<HorseRaceGameStore>()((set) => ({
       finishTime: 0,
       startTime: 0,
       winnerHorse: 0,
+      currentAnimationCount: 0,
     }),
+  updateHorseRaceGameResults: (item) =>
+    set(() => ({ horseRaceGameResults: item })),
   setSelectedHorse: (multiplier: Multiplier, data: BetData) =>
     set((state) => ({
       ...state,
@@ -73,6 +82,8 @@ export const horseRaceGameStore = create<HorseRaceGameStore>()((set) => ({
     set((state) => ({ ...state, selectedHorse: defaultSelectedHorse })),
   isParticipantsOpen: false,
   setIsParticipantsOpen: (isOpen) => set({ isParticipantsOpen: isOpen }),
+  updateCurrentAnimationCount: (count) =>
+    set(() => ({ currentAnimationCount: count })),
 }));
 
 export const useHorseRaceGameStore = <T extends keyof HorseRaceGameStore>(

@@ -1,23 +1,26 @@
 import React from "react";
 import useHorseRaceGameStore from "../store";
+import { HorseRaceStatus } from "../constants";
 
 export type HorseRaceGameProps = React.ComponentProps<"div"> & {
-  gameResults: HorseRaceGameResult[];
+  gameResults: any[];
   onAnimationStep?: (step: number) => void;
-  onAnimationCompleted?: (result: HorseRaceGameResult[]) => void;
+  onAnimationCompleted?: (result: any[]) => void;
 };
 
 export const HorseRaceGame = ({
   gameResults,
   children,
 }: HorseRaceGameProps) => {
-  const { updateHorseRaceGameResults, updateGameStatus } =
-    useHorseRaceGameStore(["updateHorseRaceGameResults", "updateGameStatus"]);
+  const { updateState, updateHorseRaceGameResults } = useHorseRaceGameStore([
+    "updateState",
+    "updateHorseRaceGameResults",
+  ]);
 
   React.useEffect(() => {
     if (gameResults.length) {
       updateHorseRaceGameResults(gameResults);
-      updateGameStatus("PLAYING");
+      updateState({ status: HorseRaceStatus.Started });
     }
   }, [gameResults]);
 
