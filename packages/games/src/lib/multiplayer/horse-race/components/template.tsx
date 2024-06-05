@@ -16,7 +16,9 @@ type TemplateOptions = {
   scene?: {
     backgroundImage?: string;
     loader?: string;
-    logo?: string;
+  };
+  controller: {
+    logo: string;
   };
 };
 
@@ -90,6 +92,7 @@ export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
             maxWager={props?.maxWager || 2000}
             maxPayout={maxPayout}
             isGamblerParticipant={isGamblerParticipant}
+            logo={props.options.controller.logo}
           />
 
           <HorseRace.Game {...props}>

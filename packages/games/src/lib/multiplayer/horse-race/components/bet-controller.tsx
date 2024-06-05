@@ -192,28 +192,31 @@ export const HorseRaceBetController: React.FC<Props> = ({
           )}
         />
 
-        <div className="order-2 mb-3 w-full md:order-[unset]">
-          <FormLabel className="text-unity-white-50">Max Payout</FormLabel>
+        <div className="wr-order-2 wr-mb-3 wr-w-full md:wr-order-[unset]">
+          <FormLabel className="wr-text-unity-white-50">Max Payout</FormLabel>
           <div
             className={cn(
-              "flex w-full items-center gap-1 rounded-lg bg-zinc-800 px-2 py-[10px] ",
-              "border border-solid border-unity-white-15 bg-unity-white-15 backdrop-blur-md"
+              "wr-flex wr-w-full wr-items-center wr-gap-1 wr-rounded-lg wr-bg-zinc-800 wr-px-2 wr-py-[10px] ",
+              "wr-border wr-border-solid wr-border-unity-white-15 wr-bg-unity-white-15 wr-backdrop-blur-md"
             )}
           >
             <WagerCurrencyIcon />
-            <span className={cn("font-semibold text-zinc-100")}>
+            <span className={cn("wr-font-semibold wr-text-zinc-100")}>
               ${maxPayout}
             </span>
           </div>
         </div>
-        <PreBetButton variant={"horse-race"} className="mb-4 md:mb-0">
+        <PreBetButton variant={"horse-race"} className="wr-mb-4 md:wr-mb-0">
           <Button
             type="submit"
             variant={"horse-race"}
-            className={cn("order-1 mb-4 w-full md:order-[unset] md:mb-0", {
-              "text-sm":
-                finishTimeLeft > 0 && status === HorseRaceStatus.Finished,
-            })}
+            className={cn(
+              "wr-order-1 wr-mb-4 wr-w-full md:wr-order-[unset] md:wr-mb-0",
+              {
+                "wr-text-sm":
+                  finishTimeLeft > 0 && status === HorseRaceStatus.Finished,
+              }
+            )}
             size={"xl"}
             disabled={
               form.formState.isSubmitting ||
@@ -232,7 +235,7 @@ export const HorseRaceBetController: React.FC<Props> = ({
           </Button>
         </PreBetButton>
       </div>
-      <footer className="absolute bottom-[14px] left-[14px] mt-auto flex items-center justify-between">
+      <footer className="wr-absolute wr-bottom-[14px] wr-left-[14px] wr-mt-auto wr-flex wr-items-center wr-justify-between">
         <UnityAudioController />
       </footer>
     </UnityBetControllerContainer>
