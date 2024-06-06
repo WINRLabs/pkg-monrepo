@@ -8,7 +8,7 @@ import { HorseRace } from "..";
 import { UnityGameContainer } from "../../../common/containers";
 import { Form } from "../../../ui/form";
 import { Horse, horseMultipliers } from "../constants";
-import useHorseRaceGameStore from "../store";
+import useHorseRaceGameStore, { HorseRaceGameState } from "../store";
 import { HorseRaceFormFields } from "../types";
 import { HorseRaceGameProps } from "./game";
 
@@ -32,11 +32,13 @@ type TemplateProps = HorseRaceGameProps & {
   onComplete: () => void;
   currentAccount: string;
   history: any;
+  updateHorseRaceState: Partial<HorseRaceGameState>;
 };
 
 export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
-  const { selectedHorse: participants } = useHorseRaceGameStore([
+  const { selectedHorse: participants, updateState } = useHorseRaceGameStore([
     "selectedHorse",
+    "updateState",
   ]);
 
   const formSchema = z.object({
@@ -79,6 +81,10 @@ export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
       return true;
     else return false;
   }, [participants]);
+
+  React.useEffect(() => {
+    if (props.updateHorseRaceState) updateState(props.updateHorseRaceState);
+  }, [props.updateHorseRaceState]);
 
   return (
     <Form {...form}>

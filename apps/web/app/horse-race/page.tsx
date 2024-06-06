@@ -6,8 +6,6 @@ import { useState } from "react";
 export default function HorseRacePage() {
   const [results, setResults] = useState<any[]>([]);
 
-  console.log(process.env.NEXT_PUBLIC_BASE_CDN_URL);
-
   return (
     <HorseRaceTemplate
       maxWager={100}
@@ -53,9 +51,6 @@ export default function HorseRacePage() {
         ]);
       }}
       buildedGameUrl={process.env.NEXT_PUBLIC_BASE_CDN_URL || ""}
-      onAnimationStep={(e) => {
-        console.log("STEP", e);
-      }}
       onAnimationCompleted={() => {
         setResults([]);
         console.log("game completed");
