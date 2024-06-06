@@ -4,7 +4,7 @@ import { HorseRaceStatus } from "../constants";
 
 export type Multiplier = "2x" | "3x" | "8x" | "15x" | "60x";
 
-type BetData = {
+export type BetData = {
   name: string;
   bet: number;
 };

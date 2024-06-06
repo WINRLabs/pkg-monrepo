@@ -8,7 +8,11 @@ import { HorseRace } from "..";
 import { UnityGameContainer } from "../../../common/containers";
 import { Form } from "../../../ui/form";
 import { Horse, horseMultipliers } from "../constants";
-import useHorseRaceGameStore, { HorseRaceGameState } from "../store";
+import useHorseRaceGameStore, {
+  BetData,
+  HorseRaceGameState,
+  Multiplier,
+} from "../store";
 import { HorseRaceFormFields } from "../types";
 import { HorseRaceGameProps } from "./game";
 
@@ -33,12 +37,18 @@ type TemplateProps = HorseRaceGameProps & {
   currentAccount: string;
   history: any;
   updateHorseRaceState: Partial<HorseRaceGameState>;
+  setSelectedHorse: { multiplier: Multiplier; data: BetData };
 };
 
 export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
-  const { selectedHorse: participants, updateState } = useHorseRaceGameStore([
+  const {
+    selectedHorse: participants,
+    updateState,
+    setSelectedHorse,
+  } = useHorseRaceGameStore([
     "selectedHorse",
     "updateState",
+    "setSelectedHorse",
   ]);
 
   const formSchema = z.object({
@@ -85,6 +95,14 @@ export const HorseRaceTemplate = ({ ...props }: TemplateProps) => {
   React.useEffect(() => {
     if (props.updateHorseRaceState) updateState(props.updateHorseRaceState);
   }, [props.updateHorseRaceState]);
+
+  React.useEffect(() => {
+    if (props.setSelectedHorse)
+      setSelectedHorse(
+        props.setSelectedHorse.multiplier,
+        props.setSelectedHorse.data
+      );
+  }, [props.setSelectedHorse]);
 
   return (
     <Form {...form}>
