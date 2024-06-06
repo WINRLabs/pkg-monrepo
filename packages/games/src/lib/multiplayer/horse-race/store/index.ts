@@ -57,6 +57,7 @@ export const horseRaceGameStore = create<HorseRaceGameStore>()((set) => ({
   lastBets: [],
   horseRaceGameResults: [],
   currentAnimationCount: 0,
+  isParticipantsOpen: false,
   addLastBet: (item) =>
     set((state) => ({ ...state, lastBets: [...state.lastBets, item] })),
   updateState: (state) => set((s) => ({ ...s, ...state })),
@@ -80,7 +81,6 @@ export const horseRaceGameStore = create<HorseRaceGameStore>()((set) => ({
     })),
   resetSelectedHorse: () =>
     set((state) => ({ ...state, selectedHorse: defaultSelectedHorse })),
-  isParticipantsOpen: false,
   setIsParticipantsOpen: (isOpen) => set({ isParticipantsOpen: isOpen }),
   updateCurrentAnimationCount: (count) =>
     set(() => ({ currentAnimationCount: count })),
