@@ -1,0 +1,832 @@
+[
+  {
+    "numOfMines": 1,
+    "reveal": 1,
+    "multiplier": "10208"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 2,
+    "multiplier": "10652"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 3,
+    "multiplier": "11136"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 4,
+    "multiplier": "11666"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 5,
+    "multiplier": "12250"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 6,
+    "multiplier": "12894"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 7,
+    "multiplier": "13611"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 8,
+    "multiplier": "14411"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 9,
+    "multiplier": "15312"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 10,
+    "multiplier": "16333"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 11,
+    "multiplier": "17500"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 12,
+    "multiplier": "18846"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 13,
+    "multiplier": "20416"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 14,
+    "multiplier": "22272"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 15,
+    "multiplier": "24500"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 16,
+    "multiplier": "27222"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 17,
+    "multiplier": "30625"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 18,
+    "multiplier": "35000"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 19,
+    "multiplier": "40833"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 20,
+    "multiplier": "49000"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 21,
+    "multiplier": "61250"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 22,
+    "multiplier": "81666"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 23,
+    "multiplier": "122500"
+  },
+  {
+    "numOfMines": 1,
+    "reveal": 24,
+    "multiplier": "245000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 1,
+    "multiplier": "10652"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 2,
+    "multiplier": "11620"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 3,
+    "multiplier": "12727"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 4,
+    "multiplier": "14000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 5,
+    "multiplier": "15473"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 6,
+    "multiplier": "17192"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 7,
+    "multiplier": "19215"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 8,
+    "multiplier": "21617"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 9,
+    "multiplier": "24500"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 10,
+    "multiplier": "28000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 11,
+    "multiplier": "32307"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 12,
+    "multiplier": "37692"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 13,
+    "multiplier": "44545"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 14,
+    "multiplier": "53454"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 15,
+    "multiplier": "65333"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 16,
+    "multiplier": "81666"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 17,
+    "multiplier": "105000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 18,
+    "multiplier": "140000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 19,
+    "multiplier": "196000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 20,
+    "multiplier": "294000"
+  },
+  {
+    "numOfMines": 2,
+    "reveal": 21,
+    "multiplier": "490000"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 1,
+    "multiplier": "11136"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 2,
+    "multiplier": "12727"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 3,
+    "multiplier": "14636"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 4,
+    "multiplier": "16947"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 5,
+    "multiplier": "19771"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 6,
+    "multiplier": "23261"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 7,
+    "multiplier": "27622"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 8,
+    "multiplier": "33147"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 9,
+    "multiplier": "40250"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 10,
+    "multiplier": "49538"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 11,
+    "multiplier": "61923"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 12,
+    "multiplier": "78811"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 13,
+    "multiplier": "102454"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 14,
+    "multiplier": "136606"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 15,
+    "multiplier": "187833"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 16,
+    "multiplier": "268333"
+  },
+  {
+    "numOfMines": 3,
+    "reveal": 17,
+    "multiplier": "402500"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 1,
+    "multiplier": "11666"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 2,
+    "multiplier": "14000"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 3,
+    "multiplier": "16947"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 4,
+    "multiplier": "20713"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 5,
+    "multiplier": "25587"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 6,
+    "multiplier": "31984"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 7,
+    "multiplier": "40513"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 8,
+    "multiplier": "52088"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 9,
+    "multiplier": "68115"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 10,
+    "multiplier": "90820"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 11,
+    "multiplier": "123846"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 12,
+    "multiplier": "173384"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 13,
+    "multiplier": "250444"
+  },
+  {
+    "numOfMines": 4,
+    "reveal": 14,
+    "multiplier": "375666"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 1,
+    "multiplier": "12250"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 2,
+    "multiplier": "15473"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 3,
+    "multiplier": "19771"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 4,
+    "multiplier": "25587"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 5,
+    "multiplier": "33583"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 6,
+    "multiplier": "44777"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 7,
+    "multiplier": "60769"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 8,
+    "multiplier": "84142"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 9,
+    "multiplier": "119201"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 10,
+    "multiplier": "173384"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 11,
+    "multiplier": "260076"
+  },
+  {
+    "numOfMines": 5,
+    "reveal": 12,
+    "multiplier": "404564"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 1,
+    "multiplier": "12894"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 2,
+    "multiplier": "17192"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 3,
+    "multiplier": "23261"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 4,
+    "multiplier": "31984"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 5,
+    "multiplier": "44777"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 6,
+    "multiplier": "63968"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 7,
+    "multiplier": "93491"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 8,
+    "multiplier": "140237"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 9,
+    "multiplier": "216730"
+  },
+  {
+    "numOfMines": 6,
+    "reveal": 10,
+    "multiplier": "346769"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 1,
+    "multiplier": "13611"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 2,
+    "multiplier": "19215"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 3,
+    "multiplier": "27622"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 4,
+    "multiplier": "40513"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 5,
+    "multiplier": "60769"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 6,
+    "multiplier": "93491"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 7,
+    "multiplier": "148028"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 8,
+    "multiplier": "242228"
+  },
+  {
+    "numOfMines": 7,
+    "reveal": 9,
+    "multiplier": "411788"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 1,
+    "multiplier": "14411"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 2,
+    "multiplier": "21617"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 3,
+    "multiplier": "33147"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 4,
+    "multiplier": "52088"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 5,
+    "multiplier": "84142"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 6,
+    "multiplier": "140237"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 7,
+    "multiplier": "242228"
+  },
+  {
+    "numOfMines": 8,
+    "reveal": 8,
+    "multiplier": "436011"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 1,
+    "multiplier": "15312"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 2,
+    "multiplier": "24500"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 3,
+    "multiplier": "40250"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 4,
+    "multiplier": "68115"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 5,
+    "multiplier": "119201"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 6,
+    "multiplier": "216730"
+  },
+  {
+    "numOfMines": 9,
+    "reveal": 7,
+    "multiplier": "411788"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 1,
+    "multiplier": "16333"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 2,
+    "multiplier": "28000"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 3,
+    "multiplier": "49538"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 4,
+    "multiplier": "90820"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 5,
+    "multiplier": "173384"
+  },
+  {
+    "numOfMines": 10,
+    "reveal": 6,
+    "multiplier": "346769"
+  },
+  {
+    "numOfMines": 11,
+    "reveal": 1,
+    "multiplier": "17500"
+  },
+  {
+    "numOfMines": 11,
+    "reveal": 2,
+    "multiplier": "32307"
+  },
+  {
+    "numOfMines": 11,
+    "reveal": 3,
+    "multiplier": "61923"
+  },
+  {
+    "numOfMines": 11,
+    "reveal": 4,
+    "multiplier": "123846"
+  },
+  {
+    "numOfMines": 11,
+    "reveal": 5,
+    "multiplier": "260076"
+  },
+  {
+    "numOfMines": 12,
+    "reveal": 1,
+    "multiplier": "18846"
+  },
+  {
+    "numOfMines": 12,
+    "reveal": 2,
+    "multiplier": "37692"
+  },
+  {
+    "numOfMines": 12,
+    "reveal": 3,
+    "multiplier": "78811"
+  },
+  {
+    "numOfMines": 12,
+    "reveal": 4,
+    "multiplier": "173384"
+  },
+  {
+    "numOfMines": 12,
+    "reveal": 5,
+    "multiplier": "404564"
+  },
+  {
+    "numOfMines": 13,
+    "reveal": 1,
+    "multiplier": "20416"
+  },
+  {
+    "numOfMines": 13,
+    "reveal": 2,
+    "multiplier": "44545"
+  },
+  {
+    "numOfMines": 13,
+    "reveal": 3,
+    "multiplier": "102454"
+  },
+  {
+    "numOfMines": 13,
+    "reveal": 4,
+    "multiplier": "250444"
+  },
+  {
+    "numOfMines": 14,
+    "reveal": 1,
+    "multiplier": "22272"
+  },
+  {
+    "numOfMines": 14,
+    "reveal": 2,
+    "multiplier": "53454"
+  },
+  {
+    "numOfMines": 14,
+    "reveal": 3,
+    "multiplier": "136606"
+  },
+  {
+    "numOfMines": 14,
+    "reveal": 4,
+    "multiplier": "375666"
+  },
+  {
+    "numOfMines": 15,
+    "reveal": 1,
+    "multiplier": "24500"
+  },
+  {
+    "numOfMines": 15,
+    "reveal": 2,
+    "multiplier": "65333"
+  },
+  {
+    "numOfMines": 15,
+    "reveal": 3,
+    "multiplier": "187833"
+  },
+  {
+    "numOfMines": 16,
+    "reveal": 1,
+    "multiplier": "27222"
+  },
+  {
+    "numOfMines": 16,
+    "reveal": 2,
+    "multiplier": "81666"
+  },
+  {
+    "numOfMines": 16,
+    "reveal": 3,
+    "multiplier": "268333"
+  },
+  {
+    "numOfMines": 17,
+    "reveal": 1,
+    "multiplier": "30625"
+  },
+  {
+    "numOfMines": 17,
+    "reveal": 2,
+    "multiplier": "105000"
+  },
+  {
+    "numOfMines": 17,
+    "reveal": 3,
+    "multiplier": "402500"
+  },
+  {
+    "numOfMines": 18,
+    "reveal": 1,
+    "multiplier": "35000"
+  },
+  {
+    "numOfMines": 18,
+    "reveal": 2,
+    "multiplier": "140000"
+  },
+  {
+    "numOfMines": 19,
+    "reveal": 1,
+    "multiplier": "40833"
+  },
+  {
+    "numOfMines": 19,
+    "reveal": 2,
+    "multiplier": "196000"
+  },
+  {
+    "numOfMines": 20,
+    "reveal": 1,
+    "multiplier": "49000"
+  },
+  {
+    "numOfMines": 20,
+    "reveal": 2,
+    "multiplier": "294000"
+  },
+  {
+    "numOfMines": 21,
+    "reveal": 1,
+    "multiplier": "61250"
+  },
+  {
+    "numOfMines": 21,
+    "reveal": 2,
+    "multiplier": "490000"
+  },
+  {
+    "numOfMines": 22,
+    "reveal": 1,
+    "multiplier": "81666"
+  },
+  {
+    "numOfMines": 23,
+    "reveal": 1,
+    "multiplier": "122500"
+  },
+  {
+    "numOfMines": 24,
+    "reveal": 1,
+    "multiplier": "245000"
+  }
+]
