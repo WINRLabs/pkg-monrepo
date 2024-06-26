@@ -12,6 +12,7 @@ export * from "./lib/solo/coin-flip-3d";
 export * from "./lib/solo/dice";
 export * from "./lib/solo/keno";
 export * from "./lib/solo/limbo";
+export * from "./lib/solo/mines";
 export * from "./lib/solo/plinko";
 export * from "./lib/solo/plinko-3d";
 export * from "./lib/solo/roll";
