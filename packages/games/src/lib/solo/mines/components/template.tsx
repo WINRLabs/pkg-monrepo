@@ -17,6 +17,9 @@ type TemplateProps = MinesGameProps & {
   maxWager?: number;
   onSubmitGameForm: (data: MinesFormField) => void;
   onFormChange?: (fields: MinesFormField) => void;
+  handleReveal: () => void;
+  handleRevealAndCashout: () => void;
+  handleGet: () => void;
 };
 
 const MinesTemplate = ({ ...props }: TemplateProps) => {
@@ -88,6 +91,7 @@ const MinesTemplate = ({ ...props }: TemplateProps) => {
         <GameContainer>
           <Mines.Game {...props}>
             <Mines.Controller
+              {...props}
               currentCashoutAmount={currentCashoutAmount}
               maxWager={props?.maxWager || 2000}
               minWager={props?.minWager || 2}
