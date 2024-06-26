@@ -11,14 +11,14 @@ const MinesCountButton: React.FC<{
   return (
     <Button
       variant={value === minesCount ? "default" : "secondary"}
-      className="relative h-10 w-[42px] transition-all"
+      className="wr-relative wr-h-10 wr-w-[42px] wr-transition-all"
       type="button"
       disabled={isDisabbled}
       onClick={() => {
         form.setValue("minesCount", value);
       }}
     >
-      <span className="z-1">{value}</span>
+      <span className="wr-z-1">{value}</span>
 
       <img
         width={20}
@@ -26,9 +26,9 @@ const MinesCountButton: React.FC<{
         alt="small_icon"
         src={"/imgs/mines/mine-count-img.png"}
         className={cn(
-          "absolute bottom-0 right-0 z-0 opacity-0 transition-all duration-150",
+          "wr-absolute wr-bottom-0 wr-right-0 wr-z-0 wr-opacity-0 wr-transition-all wr-duration-150",
           {
-            "opacity-100": value === minesCount,
+            "wr-opacity-100": value === minesCount,
           }
         )}
       />

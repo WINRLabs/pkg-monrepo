@@ -14,21 +14,23 @@ export const MinesScene = ({
   const { board } = useMinesGameStateStore();
 
   return (
-    <section className="h-full w-full text-center lg:h-[unset] lg:w-[unset]">
+    <section className="wr-h-full wr-w-full wr-text-center lg:wr-h-[unset] lg:wr-w-[unset]">
       <FormField
         name="selectedCells"
         control={form.control}
-        render={({ field }) => (
-          <FormItem className="mb-1 grid aspect-square grid-cols-5 grid-rows-5 items-center justify-center gap-2 lg:aspect-auto">
+        render={() => (
+          <FormItem className="wr-mb-1 wr-grid wr-aspect-square wr-grid-cols-5 wr-grid-rows-5 wr-items-center wr-justify-center wr-gap-2 lg:wr-aspect-auto">
             {board.map((mine, idx) => {
               return <MineCell idx={idx} mineCell={mine} key={idx} />;
             })}
           </FormItem>
         )}
       />
-      <div className="mx-auto max-w-fit rounded-lg border border-zinc-800 bg-zinc-900 px-8 py-2 text-4xl font-bold">
-        <p className="mb-1 text-sm text-zinc-500">Current Multiplier</p>X{" "}
-        <span>{currentMultiplier}</span>
+      <div className="wr-mx-auto wr-max-w-fit wr-rounded-lg wr-border wr-order-zinc-800 wr-bg-zinc-900 wr-px-8 wr-py-2 wr-text-4xl wr-font-bold">
+        <p className="wr-mb-1 wr-text-sm wr-text-zinc-500">
+          Current Multiplier
+        </p>
+        X <span>{currentMultiplier}</span>
       </div>
     </section>
   );

@@ -6,40 +6,42 @@ const MinesCountDisplay: React.FC = () => {
   const minesCount = form.watch("minesCount");
 
   return (
-    <div className="grid grid-cols-2 gap-2">
-      <div className="relative flex h-[100px] flex-col items-start justify-between rounded-lg border border-zinc-800 p-3">
-        <p className="text-lg font-semibold text-white">MINES</p>
-        <div className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-red-600 text-zinc-100">
-          <span className="text-base font-semibold">{minesCount}</span>
+    <div className="wr-wr-grid wr-wr-grid-cols-2 wr-wr-gap-2">
+      <div className="wr-relative wr-flex wr-h-[100px] wr-flex-col wr-items-start wr-justify-between wr-rounded-lg wr-border wr-border-zinc-800 wr-p-3">
+        <p className="wr-text-lg wr-font-semibold wr-text-white">MINES</p>
+        <div className="wr-flex wr-h-9 wr-w-9 wr-items-center wr-justify-center wr-rounded-[8px] wr-bg-red-600 wr-text-zinc-100">
+          <span className="wr-text-base wr-font-semibold">{minesCount}</span>
         </div>
         <img
           src={"/imgs/mines/mine-count-img.png"}
-          className="absolute bottom-0 right-0 z-10"
+          className="wr-absolute wr-bottom-0 wr-right-0 wr-z-10"
           alt="img_gem"
           width={62}
           height={62}
         />
         <img
           src={"/imgs/mines/mine-count-shade.png"}
-          className="absolute bottom-0 right-0 z-0"
+          className="wr-absolute wr-bottom-0 wr-right-0 wr-z-0"
           alt="img_gem"
         />
       </div>
-      <div className="relative flex h-[100px] flex-col items-start justify-between rounded-lg border border-zinc-800 p-3">
-        <p className="text-lg font-semibold text-white">GEMS</p>
-        <div className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-green-500 text-zinc-100">
-          <span className="text-base font-semibold">{25 - minesCount}</span>
+      <div className="wr-relative wr-flex wr-h-[100px] wr-flex-col wr-items-start wr-justify-between wr-rounded-lg wr-border wr-border-zinc-800 wr-p-3">
+        <p className="wr-text-lg wr-font-semibold wr-text-white">GEMS</p>
+        <div className="wr-flex wr-h-9 wr-w-9 wr-items-center wr-justify-center wr-rounded-[8px] wr-bg-green-500 wr-text-zinc-100">
+          <span className="wr-text-base wr-font-semibold">
+            {25 - minesCount}
+          </span>
         </div>
         <img
           src={"/imgs/mines/gem-count-img.png"}
-          className="absolute bottom-0 right-0 z-10"
+          className="wr-absolute wr-bottom-0 wr-right-0 wr-z-10"
           alt="img_gem"
           width={62}
           height={62}
         />
         <img
           src={"/imgs/mines/gem-count-shade.png"}
-          className="absolute bottom-0 right-0 z-0"
+          className="wr-absolute wr-bottom-0 wr-right-0 wr-z-0"
           alt="img_gem"
         />
       </div>

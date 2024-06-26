@@ -67,7 +67,7 @@ export const MinesBetController: React.FC<Props> = ({
   return (
     <BetControllerContainer>
       <div>
-        <div className="mb-3">
+        <div className="wr-mb-3">
           <BetControllerTitle>Mines</BetControllerTitle>
         </div>
 
@@ -86,7 +86,7 @@ export const MinesBetController: React.FC<Props> = ({
                 <FormLabel>Mines Count (1 -24)</FormLabel>
                 <NumberInput.Root
                   {...field}
-                  className="relative flex items-center gap-2"
+                  className="wr-relative wr-flex wr-items-center wr-gap-2"
                   isDisabled={gameStatus !== MINES_GAME_STATUS.IDLE}
                 >
                   <NumberInput.Container>
@@ -98,7 +98,7 @@ export const MinesBetController: React.FC<Props> = ({
                     />
                     <NumberInput.Input className="" />
                   </NumberInput.Container>
-                  <div className="flex flex-shrink-0 items-center justify-between gap-1">
+                  <div className="wr-flex wr-flex-shrink-0 wr-items-center wr-justify-between wr-gap-1">
                     <MinesCountButton
                       value={3}
                       minesCount={field.value}
@@ -124,7 +124,7 @@ export const MinesBetController: React.FC<Props> = ({
                       isDisabbled={gameStatus !== MINES_GAME_STATUS.IDLE}
                     />
                   </div>
-                  <FormMessage className="absolute left-0 top-12" />
+                  <FormMessage className="wr-absolute wr-left-0 wr-top-12" />
                 </NumberInput.Root>
               </FormItem>
             );
@@ -132,16 +132,16 @@ export const MinesBetController: React.FC<Props> = ({
         />
         <MinesCountDisplay />
 
-        <div className="mb-6 mt-6 grid grid-cols-2 gap-2">
+        <div className="wr-mb-6 wr-mt-6 wr-grid wr-grid-cols-2 wr-gap-2">
           <div>
             <FormLabel>Max Payout</FormLabel>
             <div
               className={cn(
-                "flex w-full items-center gap-1 rounded-lg bg-zinc-800 px-2 py-[10px]"
+                "wr-flex wr-w-full wr-items-center wr-gap-1 wr-rounded-lg wr-bg-zinc-800 wr-px-2 wr-py-[10px]"
               )}
             >
               <WagerCurrencyIcon />
-              <span className={cn("font-semibold text-zinc-100")}>
+              <span className={cn("wr-font-semibold wr-text-zinc-100")}>
                 ${maxPayout}
               </span>
             </div>
@@ -155,7 +155,7 @@ export const MinesBetController: React.FC<Props> = ({
           {gameStatus === MINES_GAME_STATUS.ENDED ? (
             <Button
               variant={"default"}
-              className="w-full bg-yellow-600 hover:bg-yellow-700"
+              className="wr-w-full wr-bg-yellow-600 hover:wr-bg-yellow-700"
               size={"xl"}
               type="button"
               onClick={() => {
@@ -178,7 +178,7 @@ export const MinesBetController: React.FC<Props> = ({
               <Button
                 type="submit"
                 variant={"success"}
-                className="w-full"
+                className="wr-w-full"
                 size={"xl"}
                 isLoading={
                   form.formState.isSubmitting || form.formState.isLoading
@@ -207,7 +207,7 @@ export const MinesBetController: React.FC<Props> = ({
                 <Button
                   type="submit"
                   variant={"success"}
-                  className="mt-6 w-full"
+                  className="wr-mt-6 wr-w-full"
                   size={"xl"}
                   isLoading={
                     form.formState.isSubmitting || form.formState.isLoading
@@ -231,7 +231,7 @@ export const MinesBetController: React.FC<Props> = ({
                 <Button
                   type="submit"
                   variant={"success"}
-                  className="mt-2 flex w-full items-center gap-2 bg-green-500 hover:bg-lime-700 disabled:bg-lime-950"
+                  className="wr-mt-2 wr-flex wr-w-full wr-items-center wr-gap-2 wr-bg-green-500 hover:wr-bg-lime-700 disabled:wr-bg-lime-950"
                   size={"xl"}
                   isLoading={
                     form.formState.isSubmitting || form.formState.isLoading
@@ -250,7 +250,7 @@ export const MinesBetController: React.FC<Props> = ({
                   }
                 >
                   <span>Get </span>
-                  <div className="h-1 w-1 rounded-full bg-white" />
+                  <div className="wr-h-1 wr-w-1 wr-rounded-full wr-bg-white" />
                   {`$${currentCashoutAmount}`}
                 </Button>
               )}
@@ -258,7 +258,7 @@ export const MinesBetController: React.FC<Props> = ({
           )}
         </PreBetButton>
       </div>
-      <footer className="flex items-center justify-between">
+      <footer className="wr-flex wr-items-center wr-justify-between">
         <AudioController />
       </footer>
     </BetControllerContainer>
