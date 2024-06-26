@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { MineCellBg } from "../../../svgs";
 import { FormControl, FormField, FormItem } from "../../../ui/form";
 import { cn } from "../../../utils/style";
-import { initialBoard } from "../constants";
+import { boardsSchema, initialBoard } from "../constants";
 import { useMinesGameStateStore } from "../store";
 import { MinesForm } from "../types";
 import { CDN_URL } from "../../../constants";
@@ -28,6 +28,33 @@ const MineCell: React.FC<{
                 className={cn("wr-h-full wr-w-full")}
                 checked={field.value[idx]}
                 onCheckedChange={(checked) => {
+                  const currentSelectedCellAmount = field.value.filter(
+                    (item) => item === true
+                  ).length;
+
+                  const currentSchema =
+                    boardsSchema[form.getValues().minesCount - 1];
+
+                  if (currentSchema === undefined) {
+                    // toast({
+                    //   title: "Error",
+                    //   description: "Please select mines count",
+                    //   variant: "error",
+                    // });
+
+                    return;
+                  } else if (
+                    currentSelectedCellAmount >= currentSchema.maxReveal &&
+                    !field.value[idx]
+                  ) {
+                    // toast({
+                    //   title: "Error",
+                    //   description: `You can select maximum ${currentSchema.maxReveal} cells`,
+                    //   variant: "error",
+                    // });
+
+                    return;
+                  }
                   updateBoardItem(idx, {
                     ...mineCell,
                     isSelected: checked ? true : false,
