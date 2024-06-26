@@ -7,7 +7,7 @@ const MinesCountDisplay: React.FC = () => {
   const minesCount = form.watch("minesCount");
 
   return (
-    <div className="wr-wr-grid wr-wr-grid-cols-2 wr-wr-gap-2">
+    <div className="wr-grid wr-grid-cols-2 wr-gap-2">
       <div className="wr-relative wr-flex wr-h-[100px] wr-flex-col wr-items-start wr-justify-between wr-rounded-lg wr-border wr-border-zinc-800 wr-p-3">
         <p className="wr-text-lg wr-font-semibold wr-text-white">MINES</p>
         <div className="wr-flex wr-h-9 wr-w-9 wr-items-center wr-justify-center wr-rounded-[8px] wr-bg-red-600 wr-text-zinc-100">
