@@ -7,8 +7,8 @@ import { Form } from "../../../ui/form";
 import { toDecimals } from "../../../utils/web3";
 import { MinesBetController } from "./bet-controller";
 import { MinesScene } from "./scene";
-import { initialBoard } from "../constant";
-import mineMultipliers from "../constant/mines-multipliers.json";
+import { initialBoard } from "../constants";
+import mineMultipliers from "../constants/mines-multipliers.json";
 import { useMinesGameStateStore } from "../store";
 import { MinesGameProps } from "./game";
 import { MinesFormField } from "../types";
@@ -27,7 +27,7 @@ type TemplateProps = MinesGameProps & {
   onFormChange?: (fields: MinesFormField) => void;
 };
 
-export const MinesGame = ({ ...props }: TemplateProps) => {
+const MinesTemplate = ({ ...props }: TemplateProps) => {
   const { board } = useMinesGameStateStore();
 
   const formSchema = z.object({
@@ -108,3 +108,5 @@ export const MinesGame = ({ ...props }: TemplateProps) => {
     </Form>
   );
 };
+
+export default MinesTemplate;

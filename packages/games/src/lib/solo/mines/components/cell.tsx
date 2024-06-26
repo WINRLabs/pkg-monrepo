@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { MineCellBg } from "../../../svgs";
 import { FormControl, FormField, FormItem } from "../../../ui/form";
 import { cn } from "../../../utils/style";
-import { boardsSchema, initialBoard } from "../constant";
+import { boardsSchema, initialBoard } from "../constants";
 import { useMinesGameStateStore } from "../store";
 import { MinesForm } from "../types";
 

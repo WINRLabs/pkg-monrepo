@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { initialBoard } from "../constant";
+import { initialBoard } from "../constants";
 import {
   MINES_GAME_STATUS,
   MINES_SUBMIT_TYPE,

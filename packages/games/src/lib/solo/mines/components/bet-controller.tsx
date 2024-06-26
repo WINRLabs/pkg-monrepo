@@ -10,19 +10,19 @@ import { FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
 import { NumberInput } from "../../../ui/number-input";
 import { cn } from "../../../utils/style";
 import { toDecimals } from "../../../utils/web3";
-import { initialBoard } from "../constant";
-import mineMultipliers from "../constant/mines-multipliers.json";
+import { initialBoard } from "../constants";
+import mineMultipliers from "../constants/mines-multipliers.json";
 import { useMinesGameStateStore } from "../store";
 import { MINES_GAME_STATUS, MINES_SUBMIT_TYPE, MinesForm } from "../types";
 import MinesCountButton from "./count-button";
 import MinesCountDisplay from "./count-display";
 
-interface Props {
+type Props = {
   minWager: number;
   maxWager: number;
   currentMultiplier: number;
   currentCashoutAmount: number;
-}
+};
 
 export const MinesBetController: React.FC<Props> = ({
   minWager,
