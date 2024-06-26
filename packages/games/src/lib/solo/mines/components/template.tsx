@@ -2,16 +2,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { Mines } from "..";
 import { GameContainer, SceneContainer } from "../../../common/containers";
 import { Form } from "../../../ui/form";
 import { toDecimals } from "../../../utils/web3";
-import { MinesBetController } from "./bet-controller";
-import { MinesScene } from "./scene";
 import { initialBoard } from "../constants";
 import mineMultipliers from "../constants/mines-multipliers.json";
 import { useMinesGameStateStore } from "../store";
-import { MinesGameProps } from "./game";
 import { MinesFormField } from "../types";
+import { MinesGameProps } from "./game";
 
 type TemplateOptions = {
   scene?: {
@@ -94,15 +93,17 @@ const MinesTemplate = ({ ...props }: TemplateProps) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(props.onSubmitGameForm)}>
         <GameContainer>
-          <MinesBetController
-            currentCashoutAmount={currentCashoutAmount}
-            maxWager={props?.maxWager || 2000}
-            minWager={props?.minWager || 2}
-            currentMultiplier={currentMultiplier}
-          />
-          <SceneContainer className="lg:h-[790px]">
-            <MinesScene currentMultiplier={currentMultiplier} />
-          </SceneContainer>
+          <Mines.Game {...props}>
+            <Mines.Controller
+              currentCashoutAmount={currentCashoutAmount}
+              maxWager={props?.maxWager || 2000}
+              minWager={props?.minWager || 2}
+              currentMultiplier={currentMultiplier}
+            />
+            <SceneContainer className="lg:h-[790px]">
+              <Mines.Scene currentMultiplier={currentMultiplier} />
+            </SceneContainer>
+          </Mines.Game>
         </GameContainer>
       </form>
     </Form>
