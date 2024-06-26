@@ -32,7 +32,11 @@ export const MinesBetController: React.FC<Props> = ({
 }) => {
   const form = useFormContext() as MinesForm;
 
-  const { updateMinesGameState, gameStatus, board } = useMinesGameStateStore();
+  const { updateMinesGameState, gameStatus, board } = useMinesGameStateStore([
+    "updateMinesGameState",
+    "gameStatus",
+    "board",
+  ]);
 
   const wager = form.watch("wager");
 

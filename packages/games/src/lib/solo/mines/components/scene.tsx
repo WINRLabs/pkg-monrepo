@@ -11,7 +11,7 @@ export const MinesScene = ({
 }) => {
   const form = useFormContext() as MinesForm;
 
-  const { board } = useMinesGameStateStore();
+  const { board } = useMinesGameStateStore(["board"]);
 
   return (
     <section className="wr-h-full wr-w-full wr-text-center lg:wr-h-[unset] lg:wr-w-[unset]">

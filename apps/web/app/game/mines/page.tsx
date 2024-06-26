@@ -6,7 +6,7 @@ import React from "react";
 const MinesPage = () => {
   return (
     <div>
-      <MinesTemplate />
+      <MinesTemplate gameResults={[]} />
     </div>
   );
 };

@@ -12,14 +12,7 @@ import { useMinesGameStateStore } from "../store";
 import { MinesFormField } from "../types";
 import { MinesGameProps } from "./game";
 
-type TemplateOptions = {
-  scene?: {
-    backgroundImage?: string;
-  };
-};
-
 type TemplateProps = MinesGameProps & {
-  options: TemplateOptions;
   minWager?: number;
   maxWager?: number;
   onSubmitGameForm: (data: MinesFormField) => void;
@@ -27,7 +20,7 @@ type TemplateProps = MinesGameProps & {
 };
 
 const MinesTemplate = ({ ...props }: TemplateProps) => {
-  const { board } = useMinesGameStateStore();
+  const { board } = useMinesGameStateStore(["board"]);
 
   const formSchema = z.object({
     wager: z
@@ -100,7 +93,7 @@ const MinesTemplate = ({ ...props }: TemplateProps) => {
               minWager={props?.minWager || 2}
               currentMultiplier={currentMultiplier}
             />
-            <SceneContainer className="lg:h-[790px]">
+            <SceneContainer className="lg:wr-h-[790px]">
               <Mines.Scene currentMultiplier={currentMultiplier} />
             </SceneContainer>
           </Mines.Game>

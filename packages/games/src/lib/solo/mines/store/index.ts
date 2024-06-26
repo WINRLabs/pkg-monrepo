@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { shallow } from "zustand/shallow";
 import { initialBoard } from "../constants";
 import {
   MINES_GAME_STATUS,
@@ -24,7 +25,7 @@ interface MinesGameStateActions {
 
 type MinesGameStateStore = MinesGameState & MinesGameStateActions;
 
-const useMinesGameStateStore = create<MinesGameStateStore>()((set) => ({
+const MinesResultsStore = create<MinesGameStateStore>()((set) => ({
   gameStatus: MINES_GAME_STATUS.IDLE,
   submitType: MINES_SUBMIT_TYPE.IDLE,
   currentAnimationCount: 0,
@@ -45,4 +46,17 @@ const useMinesGameStateStore = create<MinesGameStateStore>()((set) => ({
     set(() => ({ currentAnimationCount: count })),
 }));
 
-export { useMinesGameStateStore };
+export const useMinesGameStateStore = <T extends keyof MinesGameStateStore>(
+  keys: T[]
+) =>
+  MinesResultsStore((state) => {
+    const x = keys.reduce((acc, cur) => {
+      acc[cur] = state[cur];
+
+      return acc;
+    }, {} as MinesGameStateStore);
+
+    return x as Pick<MinesGameStateStore, T>;
+  }, shallow);
+
+export default useMinesGameStateStore;

@@ -14,7 +14,7 @@ const MineCell: React.FC<{
 }> = ({ mineCell, idx }) => {
   const form = useFormContext() as MinesForm;
 
-  const { updateBoardItem } = useMinesGameStateStore();
+  const { updateBoardItem } = useMinesGameStateStore(["updateBoardItem"]);
 
   return (
     <FormField
