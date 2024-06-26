@@ -3,9 +3,10 @@ import { useFormContext } from "react-hook-form";
 import { MineCellBg } from "../../../svgs";
 import { FormControl, FormField, FormItem } from "../../../ui/form";
 import { cn } from "../../../utils/style";
-import { boardsSchema, initialBoard } from "../constants";
+import { initialBoard } from "../constants";
 import { useMinesGameStateStore } from "../store";
 import { MinesForm } from "../types";
+import { CDN_URL } from "../../../constants";
 
 const MineCell: React.FC<{
   mineCell: (typeof initialBoard)["0"];
@@ -67,8 +68,8 @@ const MineCell: React.FC<{
                     <img
                       src={
                         mineCell.isBomb
-                          ? "/images/mines/revealed-mine.png"
-                          : "/images/mines/revealed-gem.png"
+                          ? `${CDN_URL}/mines/revealed-mine.png`
+                          : `${CDN_URL}/mines/revealed-gem.png`
                       }
                       width={88}
                       height={88}

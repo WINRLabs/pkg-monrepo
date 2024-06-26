@@ -16,6 +16,7 @@ import { useMinesGameStateStore } from "../store";
 import { MINES_GAME_STATUS, MINES_SUBMIT_TYPE, MinesForm } from "../types";
 import MinesCountButton from "./count-button";
 import MinesCountDisplay from "./count-display";
+import { CDN_URL } from "../../../constants";
 
 type Props = {
   minWager: number;
@@ -94,7 +95,7 @@ export const MinesBetController: React.FC<Props> = ({
                       alt="mine_icon"
                       width={17}
                       height={17}
-                      src="/imgs/mines/mine-icon.png"
+                      src={`${CDN_URL}/mines/mine-icon.png`}
                     />
                     <NumberInput.Input className="" />
                   </NumberInput.Container>

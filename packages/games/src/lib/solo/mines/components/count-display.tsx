@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { CDN_URL } from "../../../constants";
 
 const MinesCountDisplay: React.FC = () => {
   const form = useFormContext();
@@ -13,14 +14,14 @@ const MinesCountDisplay: React.FC = () => {
           <span className="wr-text-base wr-font-semibold">{minesCount}</span>
         </div>
         <img
-          src={"/imgs/mines/mine-count-img.png"}
+          src={`${CDN_URL}/mines/mine-count-image.png`}
           className="wr-absolute wr-bottom-0 wr-right-0 wr-z-10"
           alt="img_gem"
           width={62}
           height={62}
         />
         <img
-          src={"/imgs/mines/mine-count-shade.png"}
+          src={`${CDN_URL}/mines/mine-count-shade.png`}
           className="wr-absolute wr-bottom-0 wr-right-0 wr-z-0"
           alt="img_gem"
         />
@@ -33,14 +34,14 @@ const MinesCountDisplay: React.FC = () => {
           </span>
         </div>
         <img
-          src={"/imgs/mines/gem-count-img.png"}
+          src={`${CDN_URL}/mines/gem-count-image.png`}
           className="wr-absolute wr-bottom-0 wr-right-0 wr-z-10"
           alt="img_gem"
           width={62}
           height={62}
         />
         <img
-          src={"/imgs/mines/gem-count-shade.png"}
+          src={`${CDN_URL}/mines/gem-count-shade.png`}
           className="wr-absolute wr-bottom-0 wr-right-0 wr-z-0"
           alt="img_gem"
         />

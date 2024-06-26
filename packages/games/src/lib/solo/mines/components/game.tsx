@@ -10,14 +10,14 @@ export type MinesGameProps = React.ComponentProps<"div"> & {
 };
 
 export const MinesGame = ({ gameResults, children }: MinesGameProps) => {
-  const { updateMinesGameResults, updateGameStatus } = useMinesGameStateStore();
+  // const { updateMinesGameResults, updateGameStatus } = useMinesGameStateStore();
 
-  React.useEffect(() => {
-    if (gameResults.length) {
-      updateMinesGameResults(gameResults);
-      updateGameStatus(MINES_GAME_STATUS.IN_PROGRESS);
-    }
-  }, [gameResults]);
+  // React.useEffect(() => {
+  //   if (gameResults.length) {
+  //     updateMinesGameResults(gameResults);
+  //     updateGameStatus(MINES_GAME_STATUS.IN_PROGRESS);
+  //   }
+  // }, [gameResults]);
 
   return <>{children}</>;
 };

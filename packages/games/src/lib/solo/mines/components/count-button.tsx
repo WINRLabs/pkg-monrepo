@@ -1,3 +1,4 @@
+import { CDN_URL } from "../../../constants";
 import { Button } from "../../../ui/button";
 import { cn } from "../../../utils/style";
 import { MinesForm } from "../types";
@@ -24,7 +25,7 @@ const MinesCountButton: React.FC<{
         width={20}
         height={20}
         alt="small_icon"
-        src={"/imgs/mines/mine-count-img.png"}
+        src={`${CDN_URL}/mines/mine-count-image.png`}
         className={cn(
           "wr-absolute wr-bottom-0 wr-right-0 wr-z-0 wr-opacity-0 wr-transition-all wr-duration-150",
           {
