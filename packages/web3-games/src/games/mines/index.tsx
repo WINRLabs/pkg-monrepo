@@ -55,53 +55,53 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
     "board",
   ]);
 
-  const { refetch } = useReadContract({
-    abi: controllerAbi,
-    address: controllerAddress as Address,
-    functionName: "getState",
-    args: [currentAccount || "0x0"],
-    enabled: !!currentAccount,
-    onSuccess: (data) => {
-      if (data[0].numMines !== 0) {
-        const newBoard = data[0].revealedCells.map((cell) => {
-          return {
-            isSelected: cell,
-            isBomb: false,
-            isRevealed: cell,
-          };
-        });
+  // const { refetch } = useReadContract({
+  //   abi: controllerAbi,
+  //   address: controllerAddress as Address,
+  //   functionName: "getState",
+  //   args: [currentAccount || "0x0"],
+  //   enabled: !!currentAccount,
+  //   onSuccess: (data) => {
+  //     if (data[0].numMines !== 0) {
+  //       const newBoard = data[0].revealedCells.map((cell) => {
+  //         return {
+  //           isSelected: cell,
+  //           isBomb: false,
+  //           isRevealed: cell,
+  //         };
+  //       });
 
-        const token = getContractName({
-          network: "arbitrum",
-          contractAddress: data[0].token,
-        }) as GameCurrency;
+  //       const token = getContractName({
+  //         network: "arbitrum",
+  //         contractAddress: data[0].token,
+  //       }) as GameCurrency;
 
-        const tokenDecimal = tokenDecimals[token];
+  //       const tokenDecimal = tokenDecimals[token];
 
-        const wagerInGameCurrency = formatUnits(data[0].wager, tokenDecimal);
+  //       const wagerInGameCurrency = formatUnits(data[0].wager, tokenDecimal);
 
-        const wager = Number(wagerInGameCurrency) * lastPriceFeed[token];
+  //       const wager = Number(wagerInGameCurrency) * lastPriceFeed[token];
 
-        const _wager = wager < 1 ? Math.ceil(wager) : wager;
+  //       const _wager = wager < 1 ? Math.ceil(wager) : wager;
 
-        form.setValue("wager", toDecimals(_wager, 2));
+  //       form.setValue("wager", toDecimals(_wager, 2));
 
-        form.setValue(
-          "selectedCells",
-          newBoard.map((cell) => cell.isSelected)
-        );
+  //       form.setValue(
+  //         "selectedCells",
+  //         newBoard.map((cell) => cell.isSelected)
+  //       );
 
-        form.setValue("minesCount", data[0]?.numMines);
+  //       form.setValue("minesCount", data[0]?.numMines);
 
-        console.log("game set to progress");
+  //       console.log("game set to progress");
 
-        updateMinesGameState({
-          board: newBoard,
-          gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
-        });
-      }
-    },
-  });
+  //       updateMinesGameState({
+  //         board: newBoard,
+  //         gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+  //       });
+  //     }
+  //   },
+  // });
 
   const encodedParams = useMemo(() => {
     const { tokenAddress, wagerInWei, stopGainInWei, stopLossInWei } =
@@ -125,7 +125,6 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         submitType === MINES_SUBMIT_TYPE.CASHOUT ? true : false,
       ]
     );
-
     const encodedData: `0x${string}` = encodeFunctionData({
       abi: controllerAbi,
       functionName: "perform",
@@ -138,10 +137,35 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
       ],
     });
 
+    const encodedRevealCellData = encodeAbiParameters(
+      [
+        { name: "cellsPicked", type: "bool[25]" },
+        { name: "isCashout", type: "bool" },
+      ],
+      [
+        formValues.selectedCells as any,
+        submitType === MINES_SUBMIT_TYPE.CASHOUT ? true : false,
+      ]
+    );
+
+    const encodedTxRevealCellData: `0x${string}` = encodeFunctionData({
+      abi: controllerAbi,
+      functionName: "perform",
+      args: [
+        gameAddresses.mines as Address,
+        tokenAddress,
+        uiOperatorAddress as Address,
+        "revealCells",
+        encodedRevealCellData,
+      ],
+    });
+
     return {
       tokenAddress,
       encodedGameData,
       encodedTxData: encodedData,
+      encodedRevealCellData,
+      encodedTxRevealCellData,
     };
   }, [
     formValues.minesCount,
@@ -176,7 +200,7 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         encodedParams.tokenAddress,
         uiOperatorAddress as Address,
         "endGame",
-        encodedParams.encodedGameData,
+        "0x",
       ],
       address: controllerAddress as Address,
     },
@@ -193,12 +217,12 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         encodedParams.tokenAddress,
         uiOperatorAddress as Address,
         "revealCells",
-        encodedParams.encodedGameData,
+        encodedParams.encodedRevealCellData,
       ],
       address: controllerAddress as Address,
     },
     options: {},
-    encodedTxData: encodedParams.encodedTxData,
+    encodedTxData: encodedParams.encodedTxRevealCellData,
   });
 
   const allowance = useTokenAllowance({
@@ -210,26 +234,69 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
   });
 
   const onGameSubmit = async () => {
-    if (!allowance.hasAllowance) {
-      const handledAllowance = await allowance.handleAllowance({
-        errorCb: (e: any) => {
-          console.log("error", e);
-        },
-      });
+    try {
+      if (!allowance.hasAllowance) {
+        const handledAllowance = await allowance.handleAllowance({
+          errorCb: (e: any) => {
+            console.log("error", e);
+          },
+        });
 
-      if (!handledAllowance) return;
+        if (!handledAllowance) return;
+
+        if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL) {
+          await handleTx.mutateAsync();
+
+          updateMinesGameState({
+            gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+          });
+        } else if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL_AND_CASHOUT) {
+          console.log("revealing and cashing out");
+
+          await handleTx.mutateAsync();
+
+          updateMinesGameState({
+            gameStatus: MINES_GAME_STATUS.ENDED,
+          });
+        } else if (submitType === MINES_SUBMIT_TYPE.REVEAL) {
+          const revealedCells = board.map((cell, idx) => {
+            return cell.isRevealed ? false : formValues.selectedCells[idx];
+          });
+
+          console.log("revealedCells", revealedCells);
+
+          await handleReveal.mutateAsync();
+
+          updateMinesGameState({
+            gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+          });
+        } else if (submitType === MINES_SUBMIT_TYPE.CASHOUT) {
+          console.log("cashout");
+
+          await handleCashout.mutateAsync();
+
+          updateMinesGameState({
+            gameStatus: MINES_GAME_STATUS.ENDED,
+          });
+        }
+      }
+    } catch (e: any) {
+      console.log("errorl", e);
     }
   };
+  console.log({ submitType, updateMinesGameState, board });
 
   return (
-    <MinesTemplate
-      {...props}
-      onSubmitGameForm={onGameSubmit}
-      gameResults={[]}
-      onFormChange={(val) => {
-        setFormValues(val);
-      }}
-    />
+    <div>
+      <MinesTemplate
+        {...props}
+        onSubmitGameForm={onGameSubmit}
+        gameResults={[]}
+        onFormChange={(val) => {
+          setFormValues(val);
+        }}
+      />
+    </div>
   );
 };
 
