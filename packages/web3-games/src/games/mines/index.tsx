@@ -2,6 +2,7 @@
 
 import {
   MINES_GAME_STATUS,
+  MINES_SUBMIT_TYPE,
   MinesFormField,
   MinesGameResult,
   MinesTemplate,
@@ -14,10 +15,16 @@ import {
   useHandleTx,
   useTokenAllowance,
 } from "@winrlabs/web3";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useContractConfigContext } from "../hooks/use-contract-config";
-import { Address, formatUnits } from "viem";
+import {
+  Address,
+  encodeAbiParameters,
+  encodeFunctionData,
+  formatUnits,
+} from "viem";
 import { useReadContract } from "wagmi";
+import { prepareGameTransaction } from "../utils";
 
 interface TemplateWithWeb3Props {
   minWager?: number;
@@ -96,22 +103,102 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
     },
   });
 
-  const handleFirstReveal = useHandleTx({
-    abi: controllerAbi,
-    address: controllerAddress as Address,
-    functionName: "bet",
+  const encodedParams = useMemo(() => {
+    const { tokenAddress, wagerInWei, stopGainInWei, stopLossInWei } =
+      prepareGameTransaction({
+        wager: formValues.wager,
+        selectedCurrency: selectedTokenAddress,
+        lastPrice: 1,
+      });
+
+    const encodedGameData = encodeAbiParameters(
+      [
+        { name: "wager", type: "uint128" },
+        { name: "numMines", type: "uint8" },
+        { name: "cellsPicked", type: "bool[25]" },
+        { name: "isCashout", type: "bool" },
+      ],
+      [
+        wagerInWei,
+        formValues.minesCount,
+        formValues.selectedCells as any,
+        submitType === MINES_SUBMIT_TYPE.CASHOUT ? true : false,
+      ]
+    );
+
+    const encodedData: `0x${string}` = encodeFunctionData({
+      abi: controllerAbi,
+      functionName: "perform",
+      args: [
+        gameAddresses.mines as Address,
+        tokenAddress,
+        uiOperatorAddress as Address,
+        "bet",
+        encodedGameData,
+      ],
+    });
+
+    return {
+      tokenAddress,
+      encodedGameData,
+      encodedTxData: encodedData,
+    };
+  }, [
+    formValues.minesCount,
+    formValues.selectedCells,
+    formValues.wager,
+    submitType,
+  ]);
+
+  const handleTx = useHandleTx<typeof controllerAbi, "perform">({
+    writeContractVariables: {
+      abi: controllerAbi,
+      functionName: "perform",
+      args: [
+        gameAddresses.mines,
+        encodedParams.tokenAddress,
+        uiOperatorAddress as Address,
+        "bet",
+        encodedParams.encodedGameData,
+      ],
+      address: controllerAddress as Address,
+    },
+    options: {},
+    encodedTxData: encodedParams.encodedTxData,
   });
 
-  const handleCashout = useHandleTx({
-    abi: controllerAbi,
-    address: controllerAddress as Address,
-    functionName: "endGame",
+  const handleCashout = useHandleTx<typeof controllerAbi, "perform">({
+    writeContractVariables: {
+      abi: controllerAbi,
+      functionName: "perform",
+      args: [
+        gameAddresses.mines,
+        encodedParams.tokenAddress,
+        uiOperatorAddress as Address,
+        "endGame",
+        encodedParams.encodedGameData,
+      ],
+      address: controllerAddress as Address,
+    },
+    options: {},
+    encodedTxData: encodedParams.encodedTxData,
   });
 
-  const handleReveal = useHandleTx({
-    abi: controllerAbi,
-    address: controllerAddress as Address,
-    functionName: "revealCells",
+  const handleReveal = useHandleTx<typeof controllerAbi, "perform">({
+    writeContractVariables: {
+      abi: controllerAbi,
+      functionName: "perform",
+      args: [
+        gameAddresses.mines,
+        encodedParams.tokenAddress,
+        uiOperatorAddress as Address,
+        "revealCells",
+        encodedParams.encodedGameData,
+      ],
+      address: controllerAddress as Address,
+    },
+    options: {},
+    encodedTxData: encodedParams.encodedTxData,
   });
 
   const allowance = useTokenAllowance({
