@@ -32,6 +32,7 @@ const gameAddresses = {
   baccarat: process.env.NEXT_PUBLIC_BACCARAT_ADDRESS as Address,
   keno: process.env.NEXT_PUBLIC_KENO_ADDRESS as Address,
   winrBonanza: process.env.NEXT_PUBLIC_WINR_BONANZA_ADDRESS as Address,
+  mines: process.env.NEXT_PUBLIC_MINES_ADDRESS as Address,
 };
 
 export function Providers(props: { children: ReactNode }) {

@@ -11,6 +11,7 @@ import mineMultipliers from "../constants/mines-multipliers.json";
 import { useMinesGameStateStore } from "../store";
 import { MinesFormField } from "../types";
 import { MinesGameProps } from "./game";
+import debounce from "debounce";
 
 type TemplateProps = MinesGameProps & {
   minWager?: number;
@@ -84,6 +85,16 @@ const MinesTemplate = ({ ...props }: TemplateProps) => {
 
     return toDecimals((_wager * currentMultiplier) / 10000, 2);
   }, [board, minesCount, _wager]);
+
+  React.useEffect(() => {
+    const debouncedCb = debounce((formFields) => {
+      props?.onFormChange && props.onFormChange(formFields);
+    }, 400);
+
+    const subscription = form.watch(debouncedCb);
+
+    return () => subscription.unsubscribe();
+  }, [form.watch]);
 
   return (
     <Form {...form}>

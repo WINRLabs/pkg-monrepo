@@ -121,7 +121,9 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
       [
         wagerInWei,
         formValues.minesCount,
-        formValues.selectedCells as any,
+        formValues.selectedCells.length
+          ? formValues.selectedCells
+          : (Array(25).fill(false) as any),
         submitType === MINES_SUBMIT_TYPE.CASHOUT ? true : false,
       ]
     );
@@ -143,7 +145,9 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         { name: "isCashout", type: "bool" },
       ],
       [
-        formValues.selectedCells as any,
+        formValues.selectedCells.length
+          ? formValues.selectedCells
+          : (Array(25).fill(false) as any),
         submitType === MINES_SUBMIT_TYPE.CASHOUT ? true : false,
       ]
     );
@@ -286,6 +290,7 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
   };
   console.log({ submitType, updateMinesGameState, board });
 
+  console.log("selected values:", formValues);
   return (
     <div>
       <MinesTemplate
@@ -295,6 +300,11 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         onFormChange={(val) => {
           setFormValues(val);
         }}
+        minWager={props.maxWager}
+        maxWager={props.maxWager}
+        handleReveal={() => console.log("reveal")}
+        handleRevealAndCashout={() => console.log("reveal and cash out")}
+        handleGet={() => console.log("handle get")}
       />
     </div>
   );
