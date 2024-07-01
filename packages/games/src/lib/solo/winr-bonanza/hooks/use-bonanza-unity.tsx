@@ -106,6 +106,8 @@ export const useUnityBonanza = ({
 
       const _grid = JSON.stringify(grid).replace(/,/g, ", ");
 
+      console.log(_grid, "replaced grid");
+
       sendMessage(
         "WebGLHandler",
         "ReceiveMessage",
@@ -213,12 +215,12 @@ export const useUnityBonanza = ({
     handleUnlockUi,
     handleSendGrid,
     handleEnterFreespin,
+    handleEnterFreespinWithoutScatter,
     handleExitFreespin,
     handleSpinStatus,
     handleFreespinAmount,
     hideFreeSpinText,
     addEventListener,
     removeEventListener,
-    handleEnterFreespinWithoutScatter,
   };
 };

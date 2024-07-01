@@ -13,15 +13,15 @@ import { Address } from "viem";
 
 const bundlerUrl = process.env.NEXT_PUBLIC_BUNDLER_URL || "";
 const bundlerWsUrl = process.env.NEXT_PUBLIC_BUNDLER_WS_URL || "";
-const entryPointAddress = process.env.NEXT_PUBLIC_ENTRYPOINT_ADDRESS as Address;
-const factoryAddress = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as Address;
+export const entryPointAddress = process.env.NEXT_PUBLIC_ENTRYPOINT_ADDRESS as Address;
+export const factoryAddress = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as Address;
 
-const controllerAddress = process.env.NEXT_PUBLIC_CONTROLLER_ADDRESS as Address;
-const cashierAddress = process.env.NEXT_PUBLIC_CASHIER_ADDRESS as Address;
-const uiOperatorAddress = process.env
+export const controllerAddress = process.env.NEXT_PUBLIC_CONTROLLER_ADDRESS as Address;
+export const cashierAddress = process.env.NEXT_PUBLIC_CASHIER_ADDRESS as Address;
+export const uiOperatorAddress = process.env
   .NEXT_PUBLIC_UI_OPERATOR_ADDRESS as Address;
 
-const gameAddresses = {
+export const gameAddresses = {
   coinFlip: process.env.NEXT_PUBLIC_COIN_FLIP_ADDRESS as Address,
   plinko: process.env.NEXT_PUBLIC_PLINKO_ADDRESS as Address,
   limbo: process.env.NEXT_PUBLIC_LIMBO_ADDRESS as Address,
@@ -68,6 +68,7 @@ export function Providers(props: { children: ReactNode }) {
           >
             <WinrLabsWeb3GamesProvider
               config={{
+                wagmiConfig: config,
                 bundlerWsUrl,
                 contracts: {
                   gameAddresses,

@@ -29,7 +29,7 @@ export interface ReelSpinSettled {
   freeSpinsLeft: number;
   payoutMultiplier: number;
   grid: number[][];
-  type: "ReelSpinSettled";
+  type: "Game";
   spinType: SpinType;
 }
 

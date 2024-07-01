@@ -1,4 +1,10 @@
-import { WinrBonanzaFormFields, WinrBonanzaTemplate } from "@winrlabs/games";
+"use client";
+
+import {
+  ReelSpinSettled,
+  WinrBonanzaFormFields,
+  WinrBonanzaTemplate,
+} from "@winrlabs/games";
 import { useListenGameEvent } from "../hooks/use-listen-game-event";
 import {
   DecodedEvent,
@@ -12,8 +18,15 @@ import {
   useCurrentAccount,
   useHandleTx,
   useTokenAllowance,
+  winrBonanzaAbi,
 } from "@winrlabs/web3";
-import { Address, encodeAbiParameters, encodeFunctionData } from "viem";
+import {
+  Address,
+  encodeAbiParameters,
+  encodeFunctionData,
+  formatUnits,
+} from "viem";
+import { useReadContract } from "wagmi";
 
 interface TemplateWithWeb3Props {
   buildedGameUrl: string;
@@ -30,29 +43,36 @@ export default function WinrBonanzaTemplateWithWeb3({
     cashierAddress,
     uiOperatorAddress,
     selectedTokenAddress,
+    wagmiConfig,
   } = useContractConfigContext();
 
   const [formValues, setFormValues] = React.useState<WinrBonanzaFormFields>({
-    betAmount: 0,
-    actualBetAmount: 0,
+    betAmount: 1,
+    actualBetAmount: 1,
     isDoubleChance: false,
   });
 
   const gameEvent = useListenGameEvent();
 
-  const [settledResult, setSettledResult] =
-    React.useState<DecodedEvent<any, SingleStepSettledEvent>>();
+  const [settledResult, setSettledResult] = React.useState<ReelSpinSettled>();
+  const [previousFreeSpinCount, setPreviousFreeSpinCount] =
+    React.useState<number>(0);
   const currentAccount = useCurrentAccount();
 
   const allowance = useTokenAllowance({
     amountToApprove: 999,
-    owner: currentAccount.address || "0x0000000",
+    owner: currentAccount.address || "0x",
     spender: cashierAddress,
     tokenAddress: selectedTokenAddress,
     showDefaultToasts: false,
   });
 
   const encodedParams = React.useMemo(() => {
+    console.log(
+      formValues.actualBetAmount,
+      formValues.isDoubleChance,
+      "form fields"
+    );
     const { tokenAddress, wagerInWei } = prepareGameTransaction({
       wager: formValues.actualBetAmount,
       selectedCurrency: selectedTokenAddress,
@@ -94,11 +114,8 @@ export default function WinrBonanzaTemplateWithWeb3({
     });
 
     const encodedGameData = encodeAbiParameters(
-      [
-        { name: "wager", type: "uint128" },
-        { name: "isDoubleChance", type: "bool" },
-      ],
-      [wagerInWei, formValues.isDoubleChance]
+      [{ name: "wager", type: "uint128" }],
+      [wagerInWei]
     );
 
     const encodedData: `0x${string}` = encodeFunctionData({
@@ -108,7 +125,7 @@ export default function WinrBonanzaTemplateWithWeb3({
         gameAddresses.winrBonanza as Address,
         tokenAddress,
         uiOperatorAddress as Address,
-        "bet",
+        "buyFreeSpins",
         encodedGameData,
       ],
     });
@@ -185,10 +202,10 @@ export default function WinrBonanzaTemplateWithWeb3({
       functionName: "perform",
       args: [
         gameAddresses.winrBonanza as Address,
-        encodedFreeSpinParams.tokenAddress,
+        encodedBuyFreeSpinParams.tokenAddress,
         uiOperatorAddress as Address,
         "freeSpin",
-        "0x",
+        encodedFreeSpinParams.encodedTxData,
       ],
       address: controllerAddress as Address,
     },
@@ -196,52 +213,104 @@ export default function WinrBonanzaTemplateWithWeb3({
     encodedTxData: encodedFreeSpinParams.encodedTxData,
   });
 
-  const handleBet = async () => {
-    if (!allowance.hasAllowance) {
-      const handledAllowance = await allowance.handleAllowance({
-        errorCb: (e: any) => {
-          console.log("error", e);
-        },
-      });
+  const handleBet = async (errorCount = 0) => {
+    console.log("spin button called!");
 
-      if (!handledAllowance) return;
+    // if (!allowance.hasAllowance) {
+    //   const handledAllowance = await allowance.handleAllowance({
+    //     errorCb: (e: any) => {
+    //       console.log("error", e);
+    //     },
+    //   });
+
+    //   if (!handledAllowance) return;
+    // }
+
+    console.log("allowance available");
+
+    // await handleTx.mutateAsync();
+
+    try {
+      await handleTx.mutateAsync();
+    } catch (e: any) {
+      if (errorCount < 10) handleBet(errorCount + 1);
+      throw new Error(e);
     }
-
-    await handleTx.mutateAsync();
   };
 
   const handleBuyFreeSpins = async () => {
-    if (!allowance.hasAllowance) {
-      const handledAllowance = await allowance.handleAllowance({
-        errorCb: (e: any) => {
-          console.log("error", e);
-        },
-      });
-
-      if (!handledAllowance) return;
-    }
-
+    // if (!allowance.hasAllowance) {
+    //   const handledAllowance = await allowance.handleAllowance({
+    //     errorCb: (e: any) => {
+    //       console.log("error", e);
+    //     },
+    //   });
+    //   if (!handledAllowance) return;
+    // }
+    console.log("buy feature");
     await handleBuyFeatureTx.mutateAsync();
   };
 
-  const handleFreeSpin = async () => {};
+  const handleFreeSpin = async (errorCount = 0) => {
+    // if (!allowance.hasAllowance) {
+    //   const handledAllowance = await allowance.handleAllowance({
+    //     errorCb: (e: any) => {
+    //       console.log("error", e);
+    //     },
+    //   });
+    //   if (!handledAllowance) return;
+    // }
 
-  const handleRefresh = async () => {
-    if (!allowance.hasAllowance) {
-      const handledAllowance = await allowance.handleAllowance({
-        errorCb: (e: any) => {
-          console.log("error", e);
-        },
-      });
+    console.log("handleFreeSpintx called");
 
-      if (!handledAllowance) return;
+    try {
+      await handleFreeSpinTx.mutateAsync();
+    } catch (e: any) {
+      if (errorCount < 10) handleFreeSpin(errorCount + 1);
     }
-
-    await handleFreeSpinTx.mutateAsync();
   };
+
+  const gameDataRead = useReadContract({
+    config: wagmiConfig,
+    abi: winrBonanzaAbi,
+    address: gameAddresses.winrBonanza as `0x${string}`,
+    functionName: "getGame",
+    args: [currentAccount.address || "0x0000000"],
+    query: {
+      enabled: !!currentAccount.address,
+    },
+  });
+
+  const handleRefresh = async () => {};
+
+  React.useEffect(() => {
+    const gameData = gameDataRead.data as any;
+
+    if (gameData) {
+      setPreviousFreeSpinCount(gameData.freeSpinCount);
+    }
+  }, [gameDataRead.data]);
 
   React.useEffect(() => {
     console.log(gameEvent, "GAME EVENT!!");
+
+    if (
+      gameEvent?.program[0]?.type == "Game" &&
+      gameEvent?.program[0].data?.state == 2
+    ) {
+      const data = gameEvent.program[0].data;
+
+      setSettledResult({
+        betAmount: Number(formatUnits(data.wager, 18)),
+        scatterCount: data.result.scatter,
+        tumbleCount: data.result.tumble,
+        freeSpinsLeft: data.freeSpinCount,
+        payoutMultiplier: data.result.payoutMultiplier / 100,
+        grid: data.result.outcomes,
+        type: "Game",
+        spinType: data.spinType,
+      });
+    }
   }, [gameEvent]);
 
   return (
@@ -253,8 +322,8 @@ export default function WinrBonanzaTemplateWithWeb3({
       bet={handleBet}
       buyFreeSpins={handleBuyFreeSpins}
       freeSpin={handleFreeSpin}
-      gameEvent={null as any}
-      previousFreeSpinCount={0}
+      gameEvent={settledResult as ReelSpinSettled}
+      previousFreeSpinCount={previousFreeSpinCount}
     />
   );
 }

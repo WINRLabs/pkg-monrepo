@@ -1,6 +1,6 @@
 {
   "name": "@winrlabs/web3-games",
-  "version": "0.0.8",
+  "version": "0.0.14",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -58,6 +58,7 @@
     "viem": "2.x",
     "wagmi": "^2.5.7",
     "zod": "^3.22.4",
-    "zustand": "^4.4.1"
+    "zustand": "^4.4.1",
+    "react-unity-webgl": "9.4.0"
   }
 }

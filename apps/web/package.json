@@ -18,7 +18,9 @@
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-unity-webgl": "9.4.0",
     "superjson": "^2.2.1",
+    "use-debounce": "^10.0.1",
     "viem": "2.x",
     "wagmi": "^2.5.7",
     "zustand": "^4.4.1"

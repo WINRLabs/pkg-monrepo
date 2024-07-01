@@ -4,6 +4,7 @@ import {
   ContractConfig,
   ContractConfigProvider,
 } from "../games/hooks/use-contract-config";
+import { Config } from "wagmi";
 
 export const WinrLabsWeb3GamesProvider = ({
   children,
@@ -11,6 +12,7 @@ export const WinrLabsWeb3GamesProvider = ({
 }: {
   children: React.ReactNode;
   config: {
+    wagmiConfig: Config;
     bundlerWsUrl: string;
     contracts: ContractConfig;
   };
@@ -19,7 +21,10 @@ export const WinrLabsWeb3GamesProvider = ({
   // const selectedCurr = useAppUiTemplate() -> ...data  GameProvider;
 
   return (
-    <ContractConfigProvider config={config.contracts}>
+    <ContractConfigProvider
+      wagmiConfig={config.wagmiConfig}
+      config={config.contracts}
+    >
       <GameProvider
         options={{
           currency: {

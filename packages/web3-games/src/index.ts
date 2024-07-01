@@ -27,3 +27,5 @@ export { default as MinesTemplateWithWeb3 } from "./games/mines";
 export * from "./games/hooks";
 
 export * from "./providers";
+
+export * from "./games/utils";
