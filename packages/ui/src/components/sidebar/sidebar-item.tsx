@@ -15,8 +15,6 @@ export const SidebarItem = ({
 }) => {
   const { isOpen } = useSidebarStore();
 
-  console.log("is sidebar open", isOpen);
-
   return (
     <Link passHref href={href} target={target}>
       <li

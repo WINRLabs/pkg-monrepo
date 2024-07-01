@@ -33,7 +33,6 @@ interface TemplateWithWeb3Props {
   options: TemplateOptions;
   minWager?: number;
   maxWager?: number;
-
   onAnimationStep?: (step: number) => void;
   onAnimationCompleted?: (result: LimboGameResult[]) => void;
   onAnimationSkipped?: (result: LimboGameResult[]) => void;
