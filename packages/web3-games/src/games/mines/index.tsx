@@ -238,6 +238,7 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
   });
 
   const onGameSubmit = async () => {
+    console.log("onsubmit triggered");
     try {
       if (!allowance.hasAllowance) {
         const handledAllowance = await allowance.handleAllowance({
@@ -246,51 +247,62 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
           },
         });
 
+        console.log("handle allowance", handledAllowance);
+
         if (!handledAllowance) return;
+      }
+      if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL) {
+        console.log(
+          formValues.selectedCells.length
+            ? formValues.selectedCells
+            : (Array(25).fill(false) as any)
+        );
+        console.log("submit Type:", MINES_SUBMIT_TYPE.FIRST_REVEAL);
+        await handleTx.mutateAsync();
 
-        if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL) {
-          await handleTx.mutateAsync();
+        updateMinesGameState({
+          gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+        });
+      } else if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL_AND_CASHOUT) {
+        console.log(
+          "revealing and cashing out",
+          MINES_SUBMIT_TYPE.FIRST_REVEAL_AND_CASHOUT
+        );
 
-          updateMinesGameState({
-            gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
-          });
-        } else if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL_AND_CASHOUT) {
-          console.log("revealing and cashing out");
+        await handleTx.mutateAsync();
 
-          await handleTx.mutateAsync();
+        updateMinesGameState({
+          gameStatus: MINES_GAME_STATUS.ENDED,
+        });
+      } else if (submitType === MINES_SUBMIT_TYPE.REVEAL) {
+        console.log("submit Type:", submitType);
 
-          updateMinesGameState({
-            gameStatus: MINES_GAME_STATUS.ENDED,
-          });
-        } else if (submitType === MINES_SUBMIT_TYPE.REVEAL) {
-          const revealedCells = board.map((cell, idx) => {
-            return cell.isRevealed ? false : formValues.selectedCells[idx];
-          });
+        const revealedCells = board.map((cell, idx) => {
+          return cell.isRevealed ? false : formValues.selectedCells[idx];
+        });
 
-          console.log("revealedCells", revealedCells);
+        console.log("revealedCells", revealedCells);
 
-          await handleReveal.mutateAsync();
+        await handleReveal.mutateAsync();
 
-          updateMinesGameState({
-            gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
-          });
-        } else if (submitType === MINES_SUBMIT_TYPE.CASHOUT) {
-          console.log("cashout");
+        updateMinesGameState({
+          gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+        });
+      } else if (submitType === MINES_SUBMIT_TYPE.CASHOUT) {
+        console.log("cashout");
+        console.log("submit Type:", submitType);
 
-          await handleCashout.mutateAsync();
+        await handleCashout.mutateAsync();
 
-          updateMinesGameState({
-            gameStatus: MINES_GAME_STATUS.ENDED,
-          });
-        }
+        updateMinesGameState({
+          gameStatus: MINES_GAME_STATUS.ENDED,
+        });
       }
     } catch (e: any) {
-      console.log("errorl", e);
+      console.log("error", e);
     }
   };
-  console.log({ submitType, updateMinesGameState, board });
 
-  console.log("selected values:", formValues);
   return (
     <div>
       <MinesTemplate
@@ -298,9 +310,11 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         onSubmitGameForm={onGameSubmit}
         gameResults={[]}
         onFormChange={(val) => {
+          console.log(val);
+
           setFormValues(val);
         }}
-        minWager={props.maxWager}
+        minWager={props.minWager}
         maxWager={props.maxWager}
         handleReveal={() => console.log("reveal")}
         handleRevealAndCashout={() => console.log("reveal and cash out")}
