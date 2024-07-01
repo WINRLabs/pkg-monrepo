@@ -30,3 +30,8 @@ export interface MinesGameResult {
   payout: number;
   multiplier: number;
 }
+
+export interface FormSetValue {
+  key: keyof MinesFormField;
+  value: MinesFormField[keyof MinesFormField];
+}

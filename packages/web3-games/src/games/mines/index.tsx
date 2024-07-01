@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  FormSetValue,
   MINES_GAME_STATUS,
   MINES_SUBMIT_TYPE,
   MinesFormField,
@@ -11,11 +12,12 @@ import {
 } from "@winrlabs/games";
 import {
   controllerAbi,
+  minesAbi,
   useCurrentAccount,
   useHandleTx,
   useTokenAllowance,
 } from "@winrlabs/web3";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useContractConfigContext } from "../hooks/use-contract-config";
 import {
   Address,
@@ -25,6 +27,7 @@ import {
 } from "viem";
 import { useReadContract } from "wagmi";
 import { prepareGameTransaction } from "../utils";
+import { useListenGameEvent } from "../hooks/use-listen-game-event";
 
 interface TemplateWithWeb3Props {
   minWager?: number;
@@ -39,7 +42,10 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
     cashierAddress,
     uiOperatorAddress,
     selectedTokenAddress,
+    wagmiConfig,
   } = useContractConfigContext();
+
+  const [formSetValue, setFormSetValue] = useState<FormSetValue>();
 
   const [formValues, setFormValues] = useState<MinesFormField>({
     wager: 1,
@@ -55,53 +61,65 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
     "board",
   ]);
 
-  // const { refetch } = useReadContract({
-  //   abi: controllerAbi,
-  //   address: controllerAddress as Address,
-  //   functionName: "getState",
-  //   args: [currentAccount || "0x0"],
-  //   enabled: !!currentAccount,
-  //   onSuccess: (data) => {
-  //     if (data[0].numMines !== 0) {
-  //       const newBoard = data[0].revealedCells.map((cell) => {
-  //         return {
-  //           isSelected: cell,
-  //           isBomb: false,
-  //           isRevealed: cell,
-  //         };
-  //       });
+  const { refetch, data, dataUpdatedAt } = useReadContract({
+    abi: minesAbi,
+    address: gameAddresses.mines as Address,
+    functionName: "getGame",
+    args: [currentAccount.address || "0x0"],
+    config: wagmiConfig,
+    query: {
+      enabled: !!currentAccount.address,
+    },
+  });
 
-  //       const token = getContractName({
-  //         network: "arbitrum",
-  //         contractAddress: data[0].token,
-  //       }) as GameCurrency;
+  useEffect(() => {
+    if (!data) return;
 
-  //       const tokenDecimal = tokenDecimals[token];
+    if (data.numMines !== 0) {
+      const newBoard = data.revealedCells.map((cell) => {
+        return {
+          isSelected: cell,
+          isBomb: false,
+          isRevealed: cell,
+        };
+      });
 
-  //       const wagerInGameCurrency = formatUnits(data[0].wager, tokenDecimal);
+      const token = getContractName({
+        network: "arbitrum",
+        contractAddress: data.token,
+      }) as GameCurrency;
 
-  //       const wager = Number(wagerInGameCurrency) * lastPriceFeed[token];
+      const tokenDecimal = tokenDecimals[token];
 
-  //       const _wager = wager < 1 ? Math.ceil(wager) : wager;
+      const wagerInGameCurrency = formatUnits(data.wager, tokenDecimal);
 
-  //       form.setValue("wager", toDecimals(_wager, 2));
+      const wager = Number(wagerInGameCurrency) * lastPriceFeed[token];
 
-  //       form.setValue(
-  //         "selectedCells",
-  //         newBoard.map((cell) => cell.isSelected)
-  //       );
+      const _wager = wager < 1 ? Math.ceil(wager) : wager;
 
-  //       form.setValue("minesCount", data[0]?.numMines);
+      // <button onClick={() => setFormSetValue({ key: "minesCount", value: 10 })}>
 
-  //       console.log("game set to progress");
+      setFormSetValue({ key: "wager", value: toDecimals(_wager, 2) });
 
-  //       updateMinesGameState({
-  //         board: newBoard,
-  //         gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
-  //       });
-  //     }
-  //   },
-  // });
+      setFormSetValue({
+        key: "selectedCells",
+        value: newBoard.map((cell) => cell.isSelected),
+      });
+
+      setFormSetValue({ key: "minesCount", value: data?.numMines });
+
+      console.log("game set to progress");
+
+      updateMinesGameState({
+        board: newBoard,
+        gameStatus: MINES_GAME_STATUS.IN_PROGRESS,
+      });
+    }
+  }, [dataUpdatedAt]);
+
+  console.log("contract read data", data, gameAddresses.mines);
+
+  const gameEvent = useListenGameEvent();
 
   const encodedParams = useMemo(() => {
     const { tokenAddress, wagerInWei, stopGainInWei, stopLossInWei } =
@@ -252,11 +270,6 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
         if (!handledAllowance) return;
       }
       if (submitType === MINES_SUBMIT_TYPE.FIRST_REVEAL) {
-        console.log(
-          formValues.selectedCells.length
-            ? formValues.selectedCells
-            : (Array(25).fill(false) as any)
-        );
         console.log("submit Type:", MINES_SUBMIT_TYPE.FIRST_REVEAL);
         await handleTx.mutateAsync();
 
@@ -305,13 +318,21 @@ const MinesTemplateWithWeb3 = ({ ...props }: TemplateWithWeb3Props) => {
 
   return (
     <div>
+      <button onClick={() => setFormSetValue({ key: "minesCount", value: 10 })}>
+        form set value
+      </button>
+      <button onClick={async () => await handleReveal.mutateAsync()}>
+        Reveal cell
+      </button>
+      <button onClick={async () => await handleCashout.mutateAsync()}>
+        cashout
+      </button>
       <MinesTemplate
         {...props}
         onSubmitGameForm={onGameSubmit}
         gameResults={[]}
+        formSetValue={formSetValue}
         onFormChange={(val) => {
-          console.log(val);
-
           setFormValues(val);
         }}
         minWager={props.minWager}

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import z from "zod";
 import { Mines } from "..";
 import { GameContainer, SceneContainer } from "../../../common/containers";
@@ -9,7 +9,7 @@ import { toDecimals } from "../../../utils/web3";
 import { initialBoard } from "../constants";
 import mineMultipliers from "../constants/mines-multipliers.json";
 import { useMinesGameStateStore } from "../store";
-import { MinesFormField } from "../types";
+import { FormSetValue, MinesFormField } from "../types";
 import { MinesGameProps } from "./game";
 import debounce from "debounce";
 
@@ -21,6 +21,8 @@ type TemplateProps = MinesGameProps & {
   handleReveal: () => void;
   handleRevealAndCashout: () => void;
   handleGet: () => void;
+
+  formSetValue?: FormSetValue;
 };
 
 const MinesTemplate = ({ ...props }: TemplateProps) => {
@@ -95,6 +97,12 @@ const MinesTemplate = ({ ...props }: TemplateProps) => {
 
     return () => subscription.unsubscribe();
   }, [form.watch]);
+
+  React.useEffect(() => {
+    if (!props.formSetValue) return;
+
+    form.setValue(props.formSetValue.key, props.formSetValue.value);
+  }, [props.formSetValue]);
 
   return (
     <Form {...form}>
